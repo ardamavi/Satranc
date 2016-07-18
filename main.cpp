@@ -1,14 +1,15 @@
 // Arda Mavi - ardamavi.com
 
 #include <iostream>
+#include <utility>
 #include "Tahta.h"
-/*#include "Tas.h"
+#include "Tas.h"
 #include "Piyon.h"
 #include "At.h"
 #include "Fil.h"
 #include "Sah.h"
 #include "Kale.h"
-#include "Vezir.h"*/
+#include "Vezir.h"
 
 using namespace std;
 
@@ -59,22 +60,19 @@ int main(){
     // Mac için ekran temizleme:
     //system("clear");
 
-    /*
-
-    Sah* sah = new Sah(beyaz, 4, 4);
-    Sah* sah2 = new Sah(siyah,5, 3);
-
-     */
-cout << "Arda" << endl;
     Tahta tahta;
 
-    /*
+//cout << tahta.hareketEt(make_pair(1,0), make_pair(2,0)) << endl;
+
+    //cout << hareketEt(make_pair(1,0),make_pair(2,0)) << endl;
+
+    Sah* sah = new Sah(beyaz, 5, 5);
     tahta.tasEkle(sah);
-    tahta.tasEkle(sah2);
+    //tahta.tasEkle(sah2);
 
     cout << sah->yolKntrl(tahta.getTaslar(), make_pair(4,3)) << endl;
 
-    cout << "Arda Mavi - İki Kişilik Satranç" << endl ;
+    /*cout << "Arda Mavi - İki Kişilik Satranç" << endl ;
 
     bitti = false;
     oyuncu = siyah;

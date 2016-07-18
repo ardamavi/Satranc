@@ -4,6 +4,7 @@
 #define TAHTA_H
 
 #include "Tas.h"
+#include <utility>
 
 class Tahta {
     private:
@@ -22,8 +23,9 @@ class Tahta {
 
     void tasEkle(Tas* tas);
 
+    bool tasHareket(pair<int, int>, int, bool, int);
 
-    bool hareketEt(vector<Tas*>, pair <int, int> , pair <int, int>);
+    bool hareketEt(pair <int, int> , pair <int, int>);
 
 };
 

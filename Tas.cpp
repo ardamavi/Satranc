@@ -4,14 +4,6 @@
 #include <string>
 #include <utility>
 #include <vector>
-//#include "Tas.h"
-//#include "Tahta.h"
-/*#include "At.h"
-#include "Piyon.h"
-#include "Fil.h"
-#include "Sah.h"
-#include "Kale.h"
-#include "Vezir.h"*/
 
 using namespace std;
 

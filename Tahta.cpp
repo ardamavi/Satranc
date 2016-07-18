@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <utility>
 #include "Tas.h"
 #include "Kale.h"
 #include "At.h"
@@ -102,6 +103,15 @@ class Tahta {
         this->taslar.push_back(tas);
     }
 
+    bool tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMı, int tasSira){
+      // Burada rakip taş varsa, erase et
+      if(rakiptasVarMı){
+          this->taslar.erase(this->taslar.begin() + rakipTasSira);
+      }
+      this->taslar[tasSira]->setKonum(gidilecekYer);
+      return true;
+    }
+
     // hareket edildi : true
     // 1. Verilen konumdaki taşı bul
     // 2. Taşın türünü ismine bakarak bul ve casting yap
@@ -132,57 +142,27 @@ class Tahta {
 
         if(this->taslar[tasSira]->getAdı() == "Piyon"){
           if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              // Burada rakip taş varsa, erase et
-              if(rakiptasVarMı){
-                  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-              }
-              this->taslar[tasSira]->setKonum(gidilecekYer);
-              return true;
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
           }
         }else if(taslar[tasSira]->getAdı() == "Kale"){
           if (((Kale*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              // Burada rakip taş varsa, erase et
-              if(rakiptasVarMı){
-                  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-              }
-              this->taslar[tasSira]->setKonum(gidilecekYer);
-              return true;
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
           }
         }else if(taslar[tasSira]->getAdı() == "At"){
           if (((At*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              // Burada rakip taş varsa, erase et
-              if(rakiptasVarMı){
-                  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-              }
-              this->taslar[tasSira]->setKonum(gidilecekYer);
-              return true;
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
           }
         }else if(taslar[tasSira]->getAdı() == "Fil"){
           if (((Fil*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              // Burada rakip taş varsa, erase et
-              if(rakiptasVarMı){
-                  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-              }
-              this->taslar[tasSira]->setKonum(gidilecekYer);
-              return true;
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
           }
         }else if(taslar[tasSira]->getAdı() == "Vezir"){
           if (((Vezir*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              // Burada rakip taş varsa, erase et
-              if(rakiptasVarMı){
-                  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-              }
-              this->taslar[tasSira]->setKonum(gidilecekYer);
-              return true;
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
           }
         }else if(taslar[tasSira]->getAdı() == "Sah"){
           if (((Sah*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              // Burada rakip taş varsa, erase et
-              if(rakiptasVarMı){
-                  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-              }
-              this->taslar[tasSira]->setKonum(gidilecekYer);
-              return true;
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
           }
         }
 
