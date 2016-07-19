@@ -12,8 +12,7 @@ class Tahta {
         vector <Tas*> taslar;
 
     public:
-        Tahta(){
-        }
+        Tahta();
 
         void tahtaSil();
 

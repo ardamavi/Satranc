@@ -2,15 +2,13 @@
 
 #include <iostream>
 #include "Tas.h"
+#include "At.h"
 
 using namespace std;
 
-class At : public Tas {
+        At::At(takim renk, int x, int y): Tas(renk, "At", x, y){}
 
-    public:
-        At(takim renk, int x, int y): Tas(renk, "At", x, y){}
-
-    bool yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
+    bool At::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
         // Gittigi yerde tas olma :
         for(int i = 0; i < taslar.size(); i++){
@@ -50,5 +48,3 @@ class At : public Tas {
             return false;
         }
     }
-
-};
