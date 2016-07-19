@@ -24,7 +24,7 @@ class Tahta {
 
     bool tasHareket(pair<int, int>, int, bool, int);
 
-    bool hareketEt(pair <int, int> , pair <int, int>);
+    bool hareketEt(string, pair <int, int> , pair <int, int>);
 
 };
 

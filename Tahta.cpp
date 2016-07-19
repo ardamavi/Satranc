@@ -111,13 +111,18 @@ return true;
 // 3. Tasın gidilecekyere gidip gidemeyecegine bak.
 // 4. Gidebiliyorsa konumunu guncelle.
 // 5. Eger gittigi yerde baska bir rakip tas varsa, onu yok et.
-bool Tahta::hareketEt(pair <int, int> tasKonum, pair <int, int> gidilecekYer){
+bool Tahta::hareketEt(string oyuncuSirasi, pair <int, int> tasKonum, pair <int, int> gidilecekYer){
 
 int tasSira;
 
 for (int i = 0; i < this->taslar.size(); i++) {
     if(this->taslar[i]->getKonum() == tasKonum){
         tasSira = i;
+        if(taslar[i]->getTakim() == beyaz && oyuncuSirasi != "Beyaz"){
+          return false;
+        }else if(taslar[i]->getTakim() == siyah && oyuncuSirasi != "Siyah"){
+          return false;
+        }
         break;
     }
 }
