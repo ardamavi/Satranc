@@ -14,12 +14,20 @@
 using namespace std;
 
 int harfToSayi(char harf){
-  return ((int)(harf)-96);
+  return ((int)(harf)-97);
+}
+
+int sayiCharToSayi(char sayiChar){
+  return ((int)sayiChar-49);
 }
 
 int main(){
 
+    // Mac icin ekran temizleme:
+    system("clear");
+
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
+    cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e\n" << endl;
 
     string kazanan = "Yok";
     string oyunSirasi = "Siyah";
@@ -37,37 +45,52 @@ int main(){
         oyunSirasi = "Beyaz";
     }
 
-    do{
+bool oynamaTamamMi = true;
 
-      // Mac icin ekran temizleme:
-      system("clear");
+    do{
 
       // Tahta Silinir ve Cizilir:
       tahta.tahtaCiz();
+
+      if(!oynamaTamamMi){
+        cout << "\nHatalı Giriş !\n";
+      }
 
     cout << "\nOyun Sırası: " << oyunSirasi << endl;
 
     char tasinKonumuChar[3];
     cout << "\nTaşın Konumunu giriniz: ";
     cin >> tasinKonumuChar;
-    tasinKonumu.first = tasinKonumuChar[0];
+    tasinKonumu.first = sayiCharToSayi(tasinKonumuChar[0]);
     tasinKonumu.second = harfToSayi(tasinKonumuChar[1]);
 
     char oynanacakYerChar[3];
     cout << "\nTaşı Oynayacağınız Konumu Giriniz: ";
     cin >> oynanacakYerChar;
-    oynanacakYer.first = oynanacakYerChar[0];
+    oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
     oynanacakYer.second = harfToSayi(oynanacakYerChar[1]);
 
-    //TODO: Doğru oynanmış mı ?
-  }while(!(tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer)));
+    //Dogru oynanmis mi :
+    oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
 
-    //TODO: Kazananın belirlenmesi.
+    // Mac icin ekran temizleme:
+    system("clear");
+
+  }while(!oynamaTamamMi);
+
+//TODO: Kazananın belirlenmesi.
+    //NOT: Şimdilik beyaz kazansın :
     kazanan = "Beyaz";
+
+    // Mac icin ekran temizleme:
+    system("clear");
 
   }while(kazanan == "Yok");
 
-  cout << "Oyun Bitti\n\nKazanan: " << kazanan << endl;
+  // Tahta Silinir ve Cizilir:
+  tahta.tahtaCiz();
+
+  cout << "\nKazanan: " << kazanan << "\nOyun Bitti\n" << endl;
 
     return 0;
 }
