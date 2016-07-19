@@ -56,9 +56,8 @@ bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer){
         return false;
     }
 
-
     if(( gidilecekYer != make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second))
-       && !((gidilecekYer == make_pair(this->getKonum().first+ (2 * yon), this->getKonum().second)) && this->getKonum().first == 1)
+       && !((gidilecekYer == make_pair(this->getKonum().first+ (2 * yon), this->getKonum().second)) && this->getKonum().first == baslamaYeri)
        && (gidilecekYer != make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second- (1 * yon)))
        && (gidilecekYer != make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second+ (1 * yon)))){
         return false;

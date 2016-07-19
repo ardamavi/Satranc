@@ -45,7 +45,7 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
                     if(taslar[i]->getKonum() == this->getKonum()){
                         continue;
                     }
-                    if(taslar[k]->getKonum() == make_pair(i,i)){
+                    if(taslar[k]->getKonum() == make_pair(i,i-(i-1))){
                         return false;
                     }
                 }
@@ -101,7 +101,7 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
                     if(taslar[i]->getKonum() == this->getKonum()){
                         continue;
                     }
-                    if(taslar[k]->getKonum() == make_pair(i,i)){
+                    if(taslar[k]->getKonum() == make_pair(i,i+2)){
                         return false;
                     }
                 }

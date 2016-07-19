@@ -97,11 +97,11 @@ this->taslar.push_back(tas);
 }
 
 bool Tahta::tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMi, int tasSira){
+this->taslar[tasSira]->setKonum(gidilecekYer);
 // Burada rakip tas var ise, erase et :
 if(rakiptasVarMi){
   this->taslar.erase(this->taslar.begin() + rakipTasSira);
 }
-this->taslar[tasSira]->setKonum(gidilecekYer);
 return true;
 }
 

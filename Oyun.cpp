@@ -80,7 +80,7 @@ bool oynamaTamamMi = true;
 
 //TODO: Kazananın belirlenmesi.
     //NOT: Şimdilik beyaz kazansın :
-    kazanan = "Beyaz";
+//    kazanan = "Beyaz";
 
     // Mac icin ekran temizleme:
     system("clear");
