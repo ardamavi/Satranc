@@ -8,7 +8,7 @@ using namespace std;
 class Sah : public Tas{
 
     public:
-    Sah(takım renk, int x, int y) : Tas(renk, "Sah", x, y){}
+    Sah(takim renk, int x, int y) : Tas(renk, "Sah", x, y){}
 
     // Oynanacak yer ile şu anki mesafenin karesini ölçüyor. (Pisagor üçgeni)
     double mesafeKare(pair <int, int> konum1, pair <int, int> konum2){
@@ -19,7 +19,7 @@ class Sah : public Tas{
         return sonuc;
     }
 
-    bool sahaYakınMı(vector<Tas*> taslar, pair <int, int> gidilecekyer){
+    bool sahaYakinMi(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
         for (int i = 0; i < taslar.size(); i++) {
             // Taş Bizim Taşsa :
@@ -35,7 +35,7 @@ class Sah : public Tas{
                     for (int b = -1; b < 2; b++) {
                         // Stun Kontrol :
                         if(taslar[i]->getKonum() == make_pair(gidilecekyer.first+a, gidilecekyer.second+b)){
-                            if(taslar[i]->getAdı() == "Sah") {
+                            if(taslar[i]->getAdi() == "Sah") {
                                 return true;
                             }
                         }
@@ -68,13 +68,13 @@ class Sah : public Tas{
                 continue;
             }
             if(taslar[k]->getKonum() == gidilecekyer) {
-                if (this->getTakım() == taslar[k]->getTakım()){
+                if (this->getTakim() == taslar[k]->getTakim()){
                     return false;
                 }
             }
         }
 
-        if(sahaYakınMı(taslar, gidilecekyer)){
+        if(sahaYakinMi(taslar, gidilecekyer)){
             return false;
         }
 

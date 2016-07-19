@@ -24,43 +24,43 @@ class Tahta {
 
     public:
         Tahta(){
-            int satır = 1;
-            takım renk = beyaz;
+            int satir = 1;
+            takim renk = beyaz;
             for (int i = 0; i < 8; i++){
-                Piyon* piyon = new Piyon(renk, satır, i);
+                Piyon* piyon = new Piyon(renk, satir, i);
                 taslar.push_back(piyon);
                 if (i == 7 && renk == beyaz){
                     renk = siyah;
-                    satır = 6;
+                    satir = 6;
                     i = -1;
                 }
             }
 
             renk = beyaz;
-            satır = 0;
+            satir = 0;
             int sutun = 0;
 
-            taslar.push_back(new Kale(renk, satır, sutun++));
-            taslar.push_back(new At(renk, satır, sutun++));
-            taslar.push_back(new Fil(renk, satır, sutun++));
-            taslar.push_back(new Vezir(renk, satır, sutun++));
-            taslar.push_back(new Sah(renk, satır, sutun++));
-            taslar.push_back(new Fil(renk, satır, sutun++));
-            taslar.push_back(new At(renk, satır, sutun++));
-            taslar.push_back(new Kale(renk, satır, sutun++));
+            taslar.push_back(new Kale(renk, satir, sutun++));
+            taslar.push_back(new At(renk, satir, sutun++));
+            taslar.push_back(new Fil(renk, satir, sutun++));
+            taslar.push_back(new Vezir(renk, satir, sutun++));
+            taslar.push_back(new Sah(renk, satir, sutun++));
+            taslar.push_back(new Fil(renk, satir, sutun++));
+            taslar.push_back(new At(renk, satir, sutun++));
+            taslar.push_back(new Kale(renk, satir, sutun++));
 
 
             renk = siyah;
-            satır = 7;
+            satir = 7;
             sutun = 0;
-            taslar.push_back(new Kale(renk, satır, sutun++));
-            taslar.push_back(new At(renk, satır, sutun++));
-            taslar.push_back(new Fil(renk, satır, sutun++));
-            taslar.push_back(new Vezir(renk, satır, sutun++));
-            taslar.push_back(new Sah(renk, satır, sutun++));
-            taslar.push_back(new Fil(renk, satır, sutun++));
-            taslar.push_back(new At(renk, satır, sutun++));
-            taslar.push_back(new Kale(renk, satır, sutun++));
+            taslar.push_back(new Kale(renk, satir, sutun++));
+            taslar.push_back(new At(renk, satir, sutun++));
+            taslar.push_back(new Fil(renk, satir, sutun++));
+            taslar.push_back(new Vezir(renk, satir, sutun++));
+            taslar.push_back(new Sah(renk, satir, sutun++));
+            taslar.push_back(new Fil(renk, satir, sutun++));
+            taslar.push_back(new At(renk, satir, sutun++));
+            taslar.push_back(new Kale(renk, satir, sutun++));
 
         }
 
@@ -78,8 +78,8 @@ class Tahta {
                 Tas* tas = taslar[i];
                 tahta[tas->getKonum().first][tas->getKonum().second] = tas->tasKisaltmasi() + " ";
             }
-            string çerçeve = "  A  B  C  D  E  F  G  H  ";
-            cout << çerçeve << endl;
+            string cerceve = "  A  B  C  D  E  F  G  H  ";
+            cout << cerceve << endl;
             for(int i = 0; i < 8; i++){
                 for(int j = 0; j < 8; j++){
                     if (j == 0){
@@ -92,7 +92,7 @@ class Tahta {
                 }
                 cout << endl;
             }
-            cout << çerçeve << endl;
+            cout << cerceve << endl;
         }
 
     vector<Tas*> getTaslar(){
@@ -103,9 +103,9 @@ class Tahta {
         this->taslar.push_back(tas);
     }
 
-    bool tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMı, int tasSira){
+    bool tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMi, int tasSira){
       // Burada rakip taş varsa, erase et
-      if(rakiptasVarMı){
+      if(rakiptasVarMi){
           this->taslar.erase(this->taslar.begin() + rakipTasSira);
       }
       this->taslar[tasSira]->setKonum(gidilecekYer);
@@ -130,39 +130,39 @@ class Tahta {
         }
 
         int rakipTasSira;
-        bool rakiptasVarMı = false;
+        bool rakiptasVarMi = false;
 
         for (int j = 0; j < this->taslar.size(); j++) {
             if(this->taslar[j]->getKonum() == gidilecekYer){
-                rakiptasVarMı = true;
+                rakiptasVarMi = true;
                 rakipTasSira = j;
                 break;
             }
         }
 
-        if(this->taslar[tasSira]->getAdı() == "Piyon"){
+        if(this->taslar[tasSira]->getAdi() == "Piyon"){
           if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
           }
-        }else if(taslar[tasSira]->getAdı() == "Kale"){
+        }else if(taslar[tasSira]->getAdi() == "Kale"){
           if (((Kale*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
           }
-        }else if(taslar[tasSira]->getAdı() == "At"){
+        }else if(taslar[tasSira]->getAdi() == "At"){
           if (((At*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
           }
-        }else if(taslar[tasSira]->getAdı() == "Fil"){
+        }else if(taslar[tasSira]->getAdi() == "Fil"){
           if (((Fil*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
           }
-        }else if(taslar[tasSira]->getAdı() == "Vezir"){
+        }else if(taslar[tasSira]->getAdi() == "Vezir"){
           if (((Vezir*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
           }
-        }else if(taslar[tasSira]->getAdı() == "Sah"){
+        }else if(taslar[tasSira]->getAdi() == "Sah"){
           if (((Sah*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMı,tasSira);
+              return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
           }
         }
 

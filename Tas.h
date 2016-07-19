@@ -8,7 +8,7 @@
 
 using namespace std;
 
-enum takım{
+enum takim{
 
     beyaz = 1,
     siyah = -1
@@ -17,22 +17,22 @@ enum takım{
 
 class Tas{
     private:
-        takım renk;
-        string adı;
+        takim renk;
+        string adi;
         pair <int, int> konum;
 
     public:
 
 
-        Tas(takım, string, int, int);
+        Tas(takim, string, int, int);
 
         string tasKisaltmasi();
 
         pair<int, int> getKonum();
 
-        takım  getTakım();
+        takim  getTakim();
 
-        string getAdı();
+        string getAdi();
 
         void setKonum(pair <int, int> );
 };

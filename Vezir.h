@@ -8,7 +8,7 @@
 class Vezir : public Tas{
 
     public:
-        Vezir(takım, int, int);
+        Vezir(takim, int, int);
 
     bool yolKntrl(vector<Tas*> , pair <int,  int>);
 

@@ -8,11 +8,11 @@
 class Sah : public Tas{
 
     public:
-    Sah(takım, int, int);
+    Sah(takim, int, int);
 
     double mesafeKare(pair <int, int> , pair <int, int>);
 
-    bool sahaYakınMı(vector<Tas*>, pair <int, int>);
+    bool sahaYakinMi(vector<Tas*>, pair <int, int>);
 
     bool yolKntrl(vector<Tas*>, pair <int, int>);
 

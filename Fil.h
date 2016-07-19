@@ -8,7 +8,7 @@
 class Fil : public Tas{
 
     public:
-        Fil(takım, int, int);
+        Fil(takim, int, int);
 
     bool yolKntrl(vector<Tas*>, pair <int, int>);
 

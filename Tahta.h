@@ -17,7 +17,7 @@ class Tahta {
 
         void tahtaSil();
 
-        void tahtaÇiz();
+        void tahtaCiz();
 
     vector<Tas*> getTaslar();
 

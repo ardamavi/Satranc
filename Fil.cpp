@@ -8,7 +8,7 @@ using namespace std;
 class Fil : public Tas{
 
     public:
-        Fil(takım renk, int x, int y): Tas(renk, "Fil", x, y){}
+        Fil(takim renk, int x, int y): Tas(renk, "Fil", x, y){}
 
     bool yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
@@ -28,7 +28,7 @@ class Fil : public Tas{
                 continue;
             }
             if(taslar[i]->getKonum() == gidilecekyer) {
-                if(taslar[i]->getTakım() == this->getTakım()){
+                if(taslar[i]->getTakim() == this->getTakim()){
                     return false;
                 }
             }

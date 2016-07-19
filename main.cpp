@@ -60,17 +60,20 @@ int main(){
     // Mac için ekran temizleme:
     //system("clear");
 
-    Tahta tahta;
+    //Tahta tahta;
 
 //cout << tahta.hareketEt(make_pair(1,0), make_pair(2,0)) << endl;
 
-    //cout << hareketEt(make_pair(1,0),make_pair(2,0)) << endl;
+    //cout << tahta.hareketEt(make_pair(1,0),make_pair(2,0)) << endl;
 
-    Sah* sah = new Sah(beyaz, 5, 5);
-    tahta.tasEkle(sah);
+
+    //cout << 1 + 5 << endl;
+    //Sah* sah = new Sah(beyaz, 5, 5);
+    Piyon* piyon = new Piyon(beyaz, 5, 5);
+    //tahta.tasEkle(sah);
     //tahta.tasEkle(sah2);
 
-    cout << sah->yolKntrl(tahta.getTaslar(), make_pair(4,3)) << endl;
+    //cout << sah->yolKntrl(tahta.getTaslar(), make_pair(4,3)) << endl;
 
     /*cout << "Arda Mavi - İki Kişilik Satranç" << endl ;
 

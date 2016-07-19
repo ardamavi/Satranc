@@ -8,7 +8,7 @@
 class Kale: public Tas{
 
     public:
-        Kale(takım, int, int);
+        Kale(takim, int, int);
 
     bool yolKntrl(vector<Tas*>, pair <int, int>);
 };

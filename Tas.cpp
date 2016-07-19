@@ -7,27 +7,26 @@
 
 using namespace std;
 
-enum takım{
+enum takim{
 
     beyaz = 1,
     siyah = -1
 
 };
 
-
 class Tas{
     private:
-        takım renk;
-        string adı;
+        takim renk;
+        string adi;
         pair <int, int> konum;
 
     public:
 
 
 
-        Tas(takım renk, string adı, int x, int y){
+        Tas(takim renk, string adi, int x, int y){
             this->renk = renk;
-            this->adı = adı;
+            this->adi = adi;
             this->konum = make_pair(x, y);
         }
 
@@ -46,22 +45,22 @@ class Tas{
 
             }
 
-            char tmpKısaltma[3] = {tmpRenk, adı[0], '\0'};
-            string kısaltma = tmpKısaltma;
+            char tmpKisaltma[3] = {tmpRenk, adi[0], '\0'};
+            string kisaltma = tmpKisaltma;
 
-            return kısaltma;
+            return kisaltma;
         }
 
         pair<int, int> getKonum() {
             return this->konum;
         }
 
-        takım  getTakım(){
+        takim  getTakim(){
             return this->renk;
         }
 
-        string getAdı(){
-            return this->adı;
+        string getadi(){
+            return this->adi;
         }
 
         void setKonum(pair <int, int> gidilecekYer){

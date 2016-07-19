@@ -10,12 +10,12 @@ using namespace std;
 class Vezir : public Tas{
 
     public:
-        Vezir(takım renk, int x, int y) : Tas(renk, "Vezir", x, y){}
+        Vezir(takim renk, int x, int y) : Tas(renk, "Vezir", x, y){}
 
     bool yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
-        return Kale(this->getTakım(), this->getKonum().first, this->getKonum().second).yolKntrl(taslar, gidilecekyer)
-                || Fil(this->getTakım(), this->getKonum().first, this->getKonum().second).yolKntrl(taslar, gidilecekyer);
+        return Kale(this->getTakim(), this->getKonum().first, this->getKonum().second).yolKntrl(taslar, gidilecekyer)
+                || Fil(this->getTakim(), this->getKonum().first, this->getKonum().second).yolKntrl(taslar, gidilecekyer);
     }
 
 };

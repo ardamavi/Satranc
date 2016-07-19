@@ -7,9 +7,9 @@
 
 class Piyon: public Tas{
     public:
-        Piyon(takım, int , int );
+        Piyon(takim, int , int );
 
-        bool vezirOlsunMu(takım ,pair <int, int> );
+        bool vezirOlsunMu(takim ,pair <int, int> );
 
         bool yolKntrl(vector<Tas*> , pair<int, int> );
 };
