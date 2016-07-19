@@ -15,26 +15,26 @@ class Kale: public Tas{
         if(this->getKonum() == gidilecekyer){
             return false;
         }
-        // Kale Kurallar:
+        // Kale Kurallari:
 
-        // 1. Sağ sola gidebilir.
-        // 2. Yukarı aşşağı gidebilir.
+        // 1. Sag sola gidebilir.
+        // 2. Yukari asagi gidebilir.
 
-        // Gideceği yerle arasında taş varsa false döne.
+        // Gidecegi yerle arasinda tas varsa false doner.
 
-        // Ta ki önüne biri çıkana kadar :
-            // Önüne çıkan farklı renkse yer.
-            // Aynı renkse gidemez.
+        // Ta ki onune biri cikana kadar :
+            // Onune cikan farkli renkse yer.
+            // Ayni renkse gidemez.
 
-        // Sağ sol ve aşağı yukarı kontrol :
+        // Sag sol ve asagi yukari kontrol :
         if(!(gidilecekyer.first == this->getKonum().first || gidilecekyer.second == this->getKonum().second)) {
             return false;
         }
 
-        // Gideceği yerle arasında taş varsa false döner:
+        // Gidecegi yerle arasinda tas varsa false doner:
 
         if(gidilecekyer.first == this->getKonum().first){
-            // Sağ sol giderse:    (Y ekseni değişir)
+            // Sag sol giderse:    (Y ekseni degisir)
 
             for (int i = 0; i < taslar.size(); i++) {
                 if(taslar[i]->getKonum() == this->getKonum()){
@@ -45,23 +45,23 @@ class Kale: public Tas{
                     // Sola Hareket:
 
                     if(taslar[i]->getKonum().first == this->getKonum().first && taslar[i]->getKonum().second < this->getKonum().second){
-                        // Taşımızın solunda :
+                        // Tasimizin solunda :
 
                         if(gidilecekyer.second < taslar[i]->getKonum().second){
-                            // Taş yoluna çıktı :
+                            // Tas yoluna cikti :
                             return false;
                         }
 
                     }
 
                 } else{
-                    // Sağ hareket :
+                    // Sag hareket :
 
                     if(taslar[i]->getKonum().first == this->getKonum().first && taslar[i]->getKonum().second > this->getKonum().second){
-                        // Taşımızın sağında :
+                        // Tasimizin saginda :
 
                         if(gidilecekyer.second > taslar[i]->getKonum().second){
-                            // Taş yoluna çıktı :
+                            // Tas yoluna cikti :
                             return false;
                         }
 
@@ -71,7 +71,7 @@ class Kale: public Tas{
             }
 
         }else if(gidilecekyer.second == this->getKonum().second){
-            // Yukarı aşağı giderse : (X ekseni değişir)
+            // Yukari asagi giderse : (X ekseni degisir)
 
             for (int i = 0; i < taslar.size(); i++) {
                 if(taslar[i]->getKonum() == this->getKonum()){
@@ -79,26 +79,26 @@ class Kale: public Tas{
                 }
 
                 if(gidilecekyer.first < this->getKonum().first){
-                    // yukarı Hareket:
+                    // yukari Hareket:
 
                     if(taslar[i]->getKonum().first > gidilecekyer.first
                        && taslar[i]->getKonum().second == gidilecekyer.second
                        && this->getKonum().first > taslar[i]->getKonum().first){
-                        // Önümüze çıktı :
+                        // Onumuze cikti :
                         return false;
                     }
                     }else{
-                    // aşağı hareket :
+                    // asagi hareket :
 
                     if(taslar[i]->getKonum().first < gidilecekyer.first
                        && taslar[i]->getKonum().first > this->getKonum().first
                        && gidilecekyer.second == taslar[i]->getKonum().second){
-                        // Önümüze çıktı :
+                        // Onumuze cikti :
                         return false;
                     }
                 }
             }
-        // Gittiği yerde kendi takımı varsa false döner :
+        // Gittigi yerde kendi takimi varsa false doner :
         for (int k = 0; k < taslar.size(); k++) {
             if(taslar[k]->getKonum() == this->getKonum()){
                 continue;

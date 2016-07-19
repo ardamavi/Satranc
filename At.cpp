@@ -12,7 +12,7 @@ class At : public Tas {
 
     bool yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
-        // Gittiği yerde taş olma :
+        // Gittigi yerde tas olma :
         for(int i = 0; i < taslar.size(); i++){
             if(taslar[i]->getKonum() == this->getKonum()){
                 continue;

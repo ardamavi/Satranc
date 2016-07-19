@@ -12,17 +12,17 @@ class Fil : public Tas{
 
     bool yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
-        // Çapraz gider.
-        // Önüne biri çıkana kadar.
+        // Capraz gider.
+        // Onune biri cikana kadar.
 
-        // Çapraz gitme kontrol :
-        // X azalırsa aynı oranda y de azalır YA DA x artarken aynı oranda y de artar.
+        // Capraz gitme kontrol :
+        // X azalirsa ayni oranda y de azalir YA DA x artarken ayni oranda y de artar.
         // Kendi Yerine oynayamaz :
         if(this->getKonum() == gidilecekyer){
             return false;
         }
 
-        // Gittiği yerde taş olma :
+        // Gittigi yerde tas olma :
         for(int i = 0; i < taslar.size(); i++){
             if(taslar[i]->getKonum() == this->getKonum()){
                 continue;
@@ -34,11 +34,11 @@ class Fil : public Tas{
             }
         }
 
-        // Karşısına taş çıkma:
-        // x Azalıyorsa : Sol ya da Sağ Yukarı çıkılıyor
+        // Karsisina tas cıkma:
+        // x Azaliyorsa : Sol ya da Sag Yukari cikiliyor
         if(this->getKonum().first-gidilecekyer.first > 0) {
             if (this->getKonum().second-gidilecekyer.second > 0) {
-                // Sol Yukarı Çıkılıyor.
+                // Sol Yukari Çikiliyor.
                 if( ( this->getKonum().first-gidilecekyer.first != this->getKonum().second-gidilecekyer.second ) ){
                     return false;
                 }
@@ -54,8 +54,8 @@ class Fil : public Tas{
                 }
 
             }else{
-                // Sağ Yukarı Çıkılıyor.
-                // X azalırsa aynı oranda y de azalır YA DA x artarken aynı oranda y de artar.
+                // Sag Yukari Çikiliyor.
+                // X azalirsa ayni oranda y de azalir YA DA x artarken ayni oranda y de artar.
                 if((this->getKonum().first + this->getKonum().second != gidilecekyer.first + gidilecekyer.second)){
                     return false;
                 }
@@ -72,11 +72,11 @@ class Fil : public Tas{
                 }
                 }
             }else {
-            // x Artıyorsa : Sol ya da Sağ Aşağı İniliyor
+            // x Artiyorsa : Sol ya da Sag Asagi Iniliyor
             if(this->getKonum().second-gidilecekyer.second > 0){
-                // Sol Aşağı İniliyor.
+                // Sol Aşagi Iniliyor.
 
-                // X azalırsa aynı oranda y de azalır YA DA x artarken aynı oranda y de artar.
+                // X azalirsa ayni oranda y de azalir YA DA x artarken ayni oranda y de artar.
                 if((this->getKonum().first + this->getKonum().second != gidilecekyer.first + gidilecekyer.second)){
                     return false;
                 }
@@ -94,7 +94,7 @@ class Fil : public Tas{
                 }
 
             }else{
-                // Sağ Aşağı İniliyor.
+                // Sag Asagi Iniliyor.
                 if( ( this->getKonum().first-gidilecekyer.first != this->getKonum().second-gidilecekyer.second ) ){
                     return false;
                 }

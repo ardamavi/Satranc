@@ -12,14 +12,14 @@ class Piyon: public Tas{
         bool vezirOlsunMu(takim renk,pair <int, int> gidilecekYer){
 
             if(renk == beyaz){
-                // Taşın rengi beyaz ise:
+                // Tasin rengi beyaz ise:
                 if(gidilecekYer.first == 0){
                     return true;
                 } else{
                     return false;
                 }
             }else{
-                // Taşın rengi siyah ise:
+                // Tasin rengi siyah ise:
                 if(gidilecekYer.first == 7){
                     return true;
                 } else{
@@ -95,10 +95,10 @@ class Piyon: public Tas{
                 }
             }
 
-            // çapraz gidiyorsa
+            // Capraz gidiyorsa
             if(gidilecekYer == make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second- (1 * yon))){
 
-                // Eğer çaprazı doluysa:
+                // Eger caprazi doluysa:
                 for (int i = 0; i < taslar.size(); i++) {
                     if(taslar[i]->getKonum() == this->getKonum()){
                         continue;
@@ -115,7 +115,7 @@ class Piyon: public Tas{
                 return false;
 
             } else if(gidilecekYer == make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second+ (1 * yon))){
-                // Eğer çaprazı doluysa:
+                // Eger çaprazi doluysa:
                 for (int i = 0; i < taslar.size(); i++) {
                     if(taslar[i]->getKonum() == this->getKonum()){
                         continue;
@@ -134,9 +134,9 @@ class Piyon: public Tas{
             }
 
             // Piyon belirtilen konuma gidebilir mi?
-            // 1. Piyon başlangıç satırındaysa ve önü boşsa 1 veya 2 adım önüne gidebilir.
-            // 2. Piyon başlangıç satırında değilse ve önü boşsa 1 adım önüne gidebilir.
-            // 3. Piyon çaprazında rakip taş varsa, çapraz önüne gidebilir.
+            // 1. Piyon baslangic satirindaysa ve onu bos ise 1 veya 2 adim onune gidebilir.
+            // 2. Piyon baslangic satirinda degilse ve onu bos ise 1 adim onune gidebilir.
+            // 3. Piyon caprazinda rakip tas var ise, capraz onune gidebilir.
 
             return true;
         }

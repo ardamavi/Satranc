@@ -16,7 +16,7 @@ using namespace std;
 
 class Tahta {
     private:
-        // Satranç Tahtası:
+        // Satranc Tahtasi:
         string tahta[8][8];
 
         vector <Tas*> taslar;
@@ -104,7 +104,7 @@ class Tahta {
     }
 
     bool tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMi, int tasSira){
-      // Burada rakip taş varsa, erase et
+      // Burada rakip tas var ise, erase et :
       if(rakiptasVarMi){
           this->taslar.erase(this->taslar.begin() + rakipTasSira);
       }
@@ -113,11 +113,11 @@ class Tahta {
     }
 
     // hareket edildi : true
-    // 1. Verilen konumdaki taşı bul
-    // 2. Taşın türünü ismine bakarak bul ve casting yap
-    // 3. Taşın gidilecekyer'e gidip gidemeyeceğine bak.
-    // 4. Gidebiliyorsa konumunu güncelle.
-    // 5. Eğer gittiği yerde başka bir rakip taş varsa, onu yok et.
+    // 1. Verilen konumdaki tası bul
+    // 2. Tasin turunu ismine bakarak bul ve casting yap
+    // 3. Tasın gidilecekyere gidip gidemeyecegine bak.
+    // 4. Gidebiliyorsa konumunu guncelle.
+    // 5. Eger gittigi yerde baska bir rakip tas varsa, onu yok et.
     bool hareketEt(pair <int, int> tasKonum, pair <int, int> gidilecekYer){
 
         int tasSira;

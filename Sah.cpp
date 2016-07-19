@@ -10,7 +10,7 @@ class Sah : public Tas{
     public:
     Sah(takim renk, int x, int y) : Tas(renk, "Sah", x, y){}
 
-    // Oynanacak yer ile şu anki mesafenin karesini ölçüyor. (Pisagor üçgeni)
+    // Oynanacak yer ile su anki mesafenin karesini olcer: (Pisagor ucgeni)
     double mesafeKare(pair <int, int> konum1, pair <int, int> konum2){
 
         double sonuc = (double)( ((konum2.first-konum1.first)*(konum2.first-konum1.first)) +
@@ -22,16 +22,16 @@ class Sah : public Tas{
     bool sahaYakinMi(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
         for (int i = 0; i < taslar.size(); i++) {
-            // Taş Bizim Taşsa :
+            // Tas Bizim Tas ise :
             if(taslar[i]->getKonum() == this->getKonum()){
                 continue;
             }
 
-            // Burada kaladın :
+            // Burada kaladin :
 
-            // Çevredeyse :
+            // Cevredeyse :
                 for (int a = -1; a < 2; a++) {
-                    // Satır Kontrol :
+                    // Satir Kontrol :
                     for (int b = -1; b < 2; b++) {
                         // Stun Kontrol :
                         if(taslar[i]->getKonum() == make_pair(gidilecekyer.first+a, gidilecekyer.second+b)){
@@ -44,14 +44,14 @@ class Sah : public Tas{
 
         }
 
-        return false; // Yakın değil.
+        return false; // Yakin degil.
     }
 
     bool yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
 
         // 1 adım oynar.
-        // Başka şaha en az 1 kare uzaklıkta yaklaşabilir.
-        // Başka şahı yiyemez.
+        // Baska saha en az 1 kare uzaklikta yaklasabilir.
+        // Baska sahi yiyemez.
 
         // Kendi yerine oynayamaz:
         if(this->getKonum() == gidilecekyer){
@@ -62,7 +62,7 @@ class Sah : public Tas{
             return false;
         }
 
-        // Gittiği yerde kendi takımı varsa false döner :
+        // Gittigi yerde kendi takimi varsa false doner :
         for (int k = 0; k < taslar.size(); k++) {
             if(taslar[k]->getKonum() == this->getKonum()){
                 continue;
