@@ -1,5 +1,5 @@
 ## C++ Chess Game
-# Arda Mavi - ardamavi.com
+# Arda Mavi - [ardamavi.com](http://www.ardamavi.com/)
 
 Hazırladığım bir satranç oyunudur.
 C++ programlama dili ile yazılmıştır.
