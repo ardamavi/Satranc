@@ -166,3 +166,73 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
 
 return false;
 }
+
+bool Tahta::sahVarMi(string hareketEdenTakim){
+
+  pair <int, int> karsiTakimSahKonum;
+  int i = 0;
+  takim hareketEdenTakimKim;
+
+  if(hareketEdenTakim == "Beyaz"){
+    hareketEdenTakimKim = beyaz;
+  }else{
+    hareketEdenTakimKim = siyah;
+  }
+
+  for (i  = 0; i < taslar.size(); i++) {
+    if(taslar[i]->getTakim() == hareketEdenTakimKim){
+      continue;
+    }
+
+    if(taslar[i]->getAdi() == "Sah"){
+      karsiTakimSahKonum = taslar[i]->getKonum();
+      break;
+    }
+
+  }
+
+  for(i = 0; i < taslar.size(); i++){
+
+    if(taslar[i]->getTakim() != hareketEdenTakimKim){
+      continue;
+    }
+
+    if(this->taslar[i]->getAdi() == "Piyon"){
+      if (((Piyon*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
+        // Sah varsa true doner :
+          return true;
+      }
+    }else if(taslar[i]->getAdi() == "Kale"){
+      if (((Kale*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
+        // Sah varsa true doner :
+          return true;
+      }
+    }else if(taslar[i]->getAdi() == "At"){
+      if (((At*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
+        // Sah varsa true doner :
+          return true;
+      }
+    }else if(taslar[i]->getAdi() == "Fil"){
+      if (((Fil*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
+        // Sah varsa true doner :
+          return true;
+      }
+    }else if(taslar[i]->getAdi() == "Vezir"){
+      if (((Vezir*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
+        // Sah varsa true doner :
+          return true;
+      }
+    }else if(taslar[i]->getAdi() == "Sah"){
+      if (((Sah*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
+        // Sah varsa true doner :
+          return true;
+      }
+    }
+
+  }
+
+// Sah yok :
+
+return false;
+
+}

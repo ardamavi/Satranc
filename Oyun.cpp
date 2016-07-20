@@ -27,11 +27,11 @@ int main(){
     system("clear");
 
     // Mac için seslendirme:
-    system("say Arda Mavi'nin Satranç oyununa hoş geldiniz!");
+    //system("say Arda Mavi nin Satranç oyununa hoş geldiniz");
 
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
-    cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e\n" << endl;
-    cout << "Oyundan çıkış: kntrl c" << endl;
+    cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e" << endl;
+    cout << "Oyundan çıkış: kntrl c\n" << endl;
 
     string kazanan = "Yok";
     string oyunSirasi = "Siyah";
@@ -87,6 +87,14 @@ bool oynamaTamamMi = true;
     // Mac icin ekran temizleme:
     system("clear");
 
+    // Sah mı ?
+    if(tahta.sahVarMi(oyunSirasi)){
+      cout << "Sah" << endl;
+
+      // Mac için seslendirme :
+      system("say Şah !");
+    }
+
   }while(!oynamaTamamMi);
 
 //TODO: Kazananın belirlenmesi.
@@ -105,7 +113,7 @@ bool oynamaTamamMi = true;
 
   // Mac icin oyunun bitimini sesli haber verme:
   system("say Oyun bitti !");
-  syatem("say Kazanan: ");
+  system("say Kazanan: ");
 
   // Mac icin kazanan seslendirme:
   if(kazanan == "Beyaz"){

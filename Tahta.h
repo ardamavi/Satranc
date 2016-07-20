@@ -26,6 +26,8 @@ class Tahta {
 
     bool hareketEt(string, pair <int, int> , pair <int, int>);
 
+    bool sahVarMi(string);
+
 };
 
 #endif

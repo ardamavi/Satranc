@@ -31,7 +31,7 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             }
         }
     }
-
+    
     // Karsisina tas cıkma:
     // x Azaliyorsa : Sol ya da Sag Yukari cikiliyor
     if(this->getKonum().first-gidilecekyer.first > 0) {
