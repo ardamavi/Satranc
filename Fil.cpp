@@ -40,72 +40,54 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             if( ( this->getKonum().first-gidilecekyer.first != this->getKonum().second-gidilecekyer.second ) ){
                 return false;
             }
-            for (int i = gidilecekyer.first+1; i < this->getKonum().first; i++) {
+            for (int i = this->getKonum().first - 1, j = this->getKonum().second - 1; i < gidilecekyer.first; i--, j--) {
                 for (int k = 0; k < taslar.size(); k++) {
-                    if(taslar[i]->getKonum() == this->getKonum()){
-                        continue;
-                    }
-                    if(taslar[k]->getKonum() == make_pair(i,i-(i-1))){
-                        return false;
-                    }
-                }
-            }
-
-        }else{
-            // Sag Yukari Çikiliyor.
-            // X azalirsa ayni oranda y de azalir YA DA x artarken ayni oranda y de artar.
-            if((this->getKonum().first + this->getKonum().second != gidilecekyer.first + gidilecekyer.second)){
-                return false;
-            }
-            for (int i = this->getKonum().first+1, j = this->getKonum().second-1; i < gidilecekyer.first-1; i++) {
-                for (int k = 0; k < taslar.size(); k++) {
-                    if(taslar[i]->getKonum() == this->getKonum()){
-                        continue;
-                    }
                     if(taslar[k]->getKonum() == make_pair(i,j)){
                         return false;
                     }
                 }
-                j--;
             }
+        }else{
+            // Sag Yukari Çikiliyor.
+            // X azalirsa ayni oranda y de azalir YA DA x artarken ayni oranda y de artar.
+            if((gidilecekyer.first - this->getKonum().first != this->getKonum().second - gidilecekyer.second)){
+                return false;
             }
+            for (int i = this->getKonum().first-1, j = this->getKonum().second+1; i < gidilecekyer.first; i--, j++) {
+                for (int k = 0; k < taslar.size(); k++) {
+                    if(taslar[k]->getKonum() == make_pair(i,j)){
+                        return false;
+                    }
+                }
+            }
+        }
         }else {
         // x Artiyorsa : Sol ya da Sag Asagi Iniliyor
         if(this->getKonum().second-gidilecekyer.second > 0){
             // Sol Aşagi Iniliyor.
 
             // X azalirsa ayni oranda y de azalir YA DA x artarken ayni oranda y de artar.
-            if((this->getKonum().first + this->getKonum().second != gidilecekyer.first + gidilecekyer.second)){
+            if((this->getKonum().first - gidilecekyer.first != gidilecekyer.second - this->getKonum().second)){
                 return false;
             }
 
-            for (int i = this->getKonum().first+1, j = this->getKonum().second-1; i < gidilecekyer.first-1; i++) {
+            for (int i = this->getKonum().first+1, j = this->getKonum().second-1; i < gidilecekyer.first; i++, j--) {
                 for (int k = 0; k < taslar.size(); k++) {
-                    if(taslar[i]->getKonum() == this->getKonum()){
-                        continue;
-                    }
                     if(taslar[k]->getKonum() == make_pair(i,j)){
                         return false;
                     }
                 }
-                j--;
             }
-
         }else{
             // Sag Asagi Iniliyor.
             if( ( this->getKonum().first-gidilecekyer.first != this->getKonum().second-gidilecekyer.second ) ){
                 return false;
             }
-            for (int i = this->getKonum().first+1; i < gidilecekyer.first; i++) {
+            for (int i = this->getKonum().first+1, j = this->getKonum().second+1; i < gidilecekyer.first; i++, j++) {
                 for (int k = 0; k < taslar.size(); k++) {
-                    if(taslar[i]->getKonum() == this->getKonum()){
-                        continue;
-                    }
-                    if(taslar[k]->getKonum() == make_pair(i,i+1) && (this->getKonum().first)-(this->getKonum().second) == -1){
-                        return false;
-                    }else if(taslar[k]->getKonum() == make_pair(i,i) && (this->getKonum().first)-(this->getKonum().second) == 0){
-                        return false;
-                    }
+                  if(taslar[k]->getKonum() == make_pair(i,j)){
+                      return false;
+                  }
                 }
             }
         }

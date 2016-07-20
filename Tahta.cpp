@@ -88,8 +88,8 @@ void Tahta::tahtaCiz(){
     cout << cerceve << endl;
 }
 
-vector<Tas*> Tahta::getTaslar(){
-return this->taslar;
+vector<Tas*>* Tahta::getTaslar(){
+return &(this->taslar);
 }
 
 void Tahta::tasEkle(Tas* tas){
