@@ -87,6 +87,8 @@ bool oynamaTamamMi = true;
     // Mac icin ekran temizleme:
     system("clear");
 
+  }while(!oynamaTamamMi);
+
     // Sah mı ?
     if(tahta.sahVarMi(oyunSirasi)){
       cout << "Sah" << endl;
@@ -94,15 +96,6 @@ bool oynamaTamamMi = true;
       // Mac için seslendirme :
       system("say Şah !");
     }
-
-  }while(!oynamaTamamMi);
-
-//TODO: Kazananın belirlenmesi.
-    //NOT: Şimdilik beyaz kazansın :
-//    kazanan = "Beyaz";
-
-    // Mac icin ekran temizleme:
-    system("clear");
 
   }while(kazanan == "Yok");
 
