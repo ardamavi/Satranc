@@ -101,12 +101,13 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
                     if(taslar[i]->getKonum() == this->getKonum()){
                         continue;
                     }
-                    if(taslar[k]->getKonum() == make_pair(i,i+2)){
+                    if(taslar[k]->getKonum() == make_pair(i,i+1) && (this->getKonum().first)-(this->getKonum().second) == -1){
+                        return false;
+                    }else if(taslar[k]->getKonum() == make_pair(i,i) && (this->getKonum().first)-(this->getKonum().second) == 0){
                         return false;
                     }
                 }
             }
-
         }
     }
 

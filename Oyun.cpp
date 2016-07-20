@@ -28,6 +28,7 @@ int main(){
 
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e\n" << endl;
+    cout << "Oyundan çıkış: kntrl c" << endl;
 
     string kazanan = "Yok";
     string oyunSirasi = "Siyah";
