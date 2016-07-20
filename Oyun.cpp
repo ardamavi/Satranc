@@ -26,6 +26,9 @@ int main(){
     // Mac icin ekran temizleme:
     system("clear");
 
+    // Mac için seslendirme:
+    system("say Arda Mavi'nin Satranç oyununa hoş geldiniz!");
+
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e\n" << endl;
     cout << "Oyundan çıkış: kntrl c" << endl;
@@ -55,9 +58,16 @@ bool oynamaTamamMi = true;
 
       if(!oynamaTamamMi){
         cout << "\nHatalı Giriş !\n";
+        system("say Hatalı giriş!");
       }
 
+    // Mac icin oyun sırası seslendirme:
     cout << "\nOyun Sırası: " << oyunSirasi << endl;
+    if(oyunSirasi == "Beyaz"){
+      system("say Oyun sırası beyaz takımda");
+    }else if(oyunSirasi == "Siyah"){
+      system("say Oyun sırası siyah takımda");
+    }
 
     char tasinKonumuChar[3];
     cout << "\nTaşın Konumunu giriniz: ";
@@ -92,6 +102,19 @@ bool oynamaTamamMi = true;
   tahta.tahtaCiz();
 
   cout << "\nKazanan: " << kazanan << "\nOyun Bitti\n" << endl;
+
+  // Mac icin oyunun bitimini sesli haber verme:
+  system("say Oyun bitti !");
+  syatem("say Kazanan: ");
+
+  // Mac icin kazanan seslendirme:
+  if(kazanan == "Beyaz"){
+    system("say Kazanan Beyaz takım!");
+  }else if(kazanan == "Siyah"){
+    system("say Kazanan Siyah takım!");
+  }else{
+    system("say Kazanan yok!");
+  }
 
     return 0;
 }
