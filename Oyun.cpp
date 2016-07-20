@@ -91,7 +91,7 @@ bool oynamaTamamMi = true;
 
     // Sah mı ?
     if(tahta.sahVarMi(oyunSirasi)){
-      cout << "Sah" << endl;
+      cout << "Şah !" << endl;
 
       // Mac için seslendirme :
       system("say Şah !");

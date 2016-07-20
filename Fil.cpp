@@ -31,7 +31,7 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             }
         }
     }
-    
+
     // Karsisina tas cıkma:
     // x Azaliyorsa : Sol ya da Sag Yukari cikiliyor
     if(this->getKonum().first-gidilecekyer.first > 0) {
@@ -40,7 +40,7 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             if( ( this->getKonum().first-gidilecekyer.first != this->getKonum().second-gidilecekyer.second ) ){
                 return false;
             }
-            for (int i = this->getKonum().first - 1, j = this->getKonum().second - 1; i < gidilecekyer.first; i--, j--) {
+            for (int i = this->getKonum().first - 1, j = this->getKonum().second - 1; i > gidilecekyer.first; i--, j--) {
                 for (int k = 0; k < taslar.size(); k++) {
                     if(taslar[k]->getKonum() == make_pair(i,j)){
                         return false;
@@ -53,7 +53,7 @@ bool Fil::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             if((gidilecekyer.first - this->getKonum().first != this->getKonum().second - gidilecekyer.second)){
                 return false;
             }
-            for (int i = this->getKonum().first-1, j = this->getKonum().second+1; i < gidilecekyer.first; i--, j++) {
+            for (int i = this->getKonum().first-1, j = this->getKonum().second+1; i > gidilecekyer.first; i--, j++) {
                 for (int k = 0; k < taslar.size(); k++) {
                     if(taslar[k]->getKonum() == make_pair(i,j)){
                         return false;
