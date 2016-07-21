@@ -11,7 +11,16 @@
 #include "Piyon.h"
 #include "Sah.h"
 #include "Tahta.h"
+#include "Color.h"
 
+
+Color::Modifier color1(Color::BG_COLOR1);
+Color::Modifier color2(Color::BG_COLOR2);
+Color::Modifier cerceveColor(Color::BG_CERCEVE);
+Color::Modifier tasBeyaz(Color::FG_TASBEYAZ);
+Color::Modifier yaziBeyaz(Color::FG_BEYAZ);
+Color::Modifier tasSiyah(Color::FG_TASSIYAH);
+Color::Modifier defaultColor(Color::FG_DEFAULT);
 
 using namespace std;
 
@@ -69,23 +78,54 @@ void Tahta::tahtaCiz(){
     tahtaSil();
     for (int i = 0; i < taslar.size(); i++){
         Tas* tas = taslar[i];
-        tahta[tas->getKonum().first][tas->getKonum().second] = tas->tasKisaltmasi() + " ";
+        tahta[tas->getKonum().first][tas->getKonum().second] = (tas->tasKisaltmasi());
     }
-    string cerceve = "  A  B  C  D  E  F  G  H  ";
-    cout << cerceve << endl;
+    string cerceve = "    A  B  C  D  E  F  G  H    ";
+    cout << cerceveColor << yaziBeyaz << cerceve << endl;
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             if (j == 0){
-                cout << i + 1 << " ";
+                cout << yaziBeyaz << " " << cerceveColor << i + 1 << " ";
             }
-            cout << tahta[i][j];
+            if(j%2 == 0){
+              if(i%2 == 0){
+                cout << color1;
+              }else{
+                cout << color2;
+              }
+            }else{
+              if(i%2 != 0){
+                cout << color1;
+              }else{
+                cout << color2;
+              }
+            }
+
+            if(tahta[i][j] != "   "){
+
+              for (int c = 0; c < taslar.size(); c++) {
+                if(taslar[c]->getKonum() == make_pair(i, j)){
+                  if(taslar[c]->getTakim() == siyah){
+                    // Beyaz ise :
+                      cout << tasSiyah << tahta[i][j] ;
+                  }else{
+                    // Siyah ise :
+                      cout << tasBeyaz << tahta[i][j] ;
+                  }
+                }
+              }
+
+            }else{
+              cout << tahta[i][j] ;
+            }
+
             if (j == 7){
-                cout << i + 1;
+                cout << yaziBeyaz << cerceveColor << " " << i + 1 << " ";
             }
         }
         cout << endl;
     }
-    cout << cerceve << endl;
+    cout << yaziBeyaz << cerceveColor << cerceve << endl;
 }
 
 vector<Tas*>* Tahta::getTaslar(){

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <utility>
+#include "Color.h" // namespace Color
 #include "Tahta.h"
 #include "Tas.h"
 #include "Piyon.h"
@@ -10,6 +11,11 @@
 #include "Sah.h"
 #include "Kale.h"
 #include "Vezir.h"
+#include "Color.h"
+
+Color::Modifier bgColor(Color::BG_COLOR1);
+Color::Modifier defaultColorfg(Color::FG_DEFAULT);
+Color::Modifier defaultColorbg(Color::BG_DEFAULT);
 
 using namespace std;
 
@@ -24,10 +30,13 @@ int sayiCharToSayi(char sayiChar){
 int main(){
 
     // Mac icin ekran temizleme:
+
     system("clear");
 
     // Mac için seslendirme:
     //system("say Arda Mavi nin Satranç oyununa hoş geldiniz");
+
+    cout << defaultColorbg << defaultColorfg << endl;
 
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e" << endl;
@@ -53,8 +62,10 @@ bool oynamaTamamMi = true;
 
     do{
 
+      cout << defaultColorbg << defaultColorfg << endl;
       // Tahta Silinir ve Cizilir:
       tahta.tahtaCiz();
+      cout << defaultColorbg << defaultColorfg << endl;
 
       if(!oynamaTamamMi){
         cout << "\nHatalı Giriş !\n";

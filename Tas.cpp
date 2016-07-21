@@ -8,23 +8,63 @@
 
 using namespace std;
 
-string Tas::tasKisaltmasi(){
+  string Tas::tasKisaltmasi(){
 
-  char tmpRenk;
+  string kisaltma = " ";
 
-  switch (this->renk){
+  if(this->renk == 1){
+    // renk beyaz:
 
-      case 1:
-          tmpRenk = 'b';
-          break;
-      case -1:
-          tmpRenk = 's';
-          break;
+    // Unicode :
+    switch (adi[0]) {
+      case 'P':
+      kisaltma += "\u265F";
+      break;
+      case 'K':
+      kisaltma += "\u265C";
+      break;
+      case 'A':
+      kisaltma += "\u265E";
+      break;
+      case 'F':
+      kisaltma += "\u265D";
+      break;
+      case 'V':
+      kisaltma += "\u265B";
+      break;
+      case 'S':
+      kisaltma += "\u265A";
+      break;
+    }
+
+  }else{
+    // renk siyah:
+
+    // Unicode :
+    switch (adi[0]) {
+      case 'P':
+      kisaltma += "\u265F";
+      break;
+      case 'K':
+      kisaltma += "\u265C";
+      break;
+      case 'A':
+      kisaltma += "\u265E";
+      break;
+      case 'F':
+      kisaltma += "\u265D";
+      break;
+      case 'V':
+      kisaltma += "\u265B";
+      break;
+      case 'S':
+      kisaltma += "\u265A";
+      break;
+    }
 
   }
 
-  char tmpKisaltma[3] = {tmpRenk, adi[0], '\0'};
-  string kisaltma = tmpKisaltma;
+  kisaltma += " ";
 
   return kisaltma;
 }
