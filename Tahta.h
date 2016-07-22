@@ -22,6 +22,8 @@ class Tahta {
 
     void tasEkle(Tas* tas);
 
+    void setTaslar(vector<Tas*>);
+
     bool tasHareket(pair<int, int>, int, bool, int);
 
     bool hareketEt(string, pair <int, int> , pair <int, int>);

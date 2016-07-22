@@ -13,7 +13,6 @@
 #include "Vezir.h"
 #include "Color.h"
 
-Color::Modifier bgColor(Color::BG_COLOR1);
 Color::Modifier defaultColorfg(Color::FG_DEFAULT);
 Color::Modifier defaultColorbg(Color::BG_DEFAULT);
 
@@ -36,7 +35,7 @@ int main(){
     // Mac için seslendirme:
     //system("say Arda Mavi nin Satranç oyununa hoş geldiniz");
 
-    cout << defaultColorbg << defaultColorfg << endl;
+    cout << defaultColorbg << defaultColorfg;
 
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e" << endl;
@@ -46,6 +45,7 @@ int main(){
     string oyunSirasi = "Siyah";
     pair <int, int> tasinKonumu;
     pair <int, int> oynanacakYer;
+    bool sahDurum = false;
 
     Tahta tahta;
 
@@ -58,7 +58,7 @@ int main(){
         oyunSirasi = "Beyaz";
     }
 
-bool oynamaTamamMi = true;
+    bool oynamaTamamMi = true;
 
     do{
 
@@ -92,16 +92,56 @@ bool oynamaTamamMi = true;
     oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
     oynanacakYer.second = harfToSayi(oynanacakYerChar[1]);
 
-    //Dogru oynanmis mi :
-    oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
+    if(sahDurum == true){
+
+      string eskiOyunSirasi;
+
+      if(oyunSirasi == "Beyaz"){
+        eskiOyunSirasi = "Siyah";
+      }else if(oyunSirasi == "Siyah"){
+        eskiOyunSirasi = "Beyaz";
+      }
+
+      vector<Tas*> taslarKopya;
+
+      // Taşlar kopyalanır:
+      for (int i = 0; i < tahta.getTaslar()->size(); i++) {
+        taslarKopya.push_back(new Tas(*(*(tahta.getTaslar()))[i]));
+      }
+
+      tahta.hareketEt(oyunSirasi, tasinKonumu, oynanacakYer);
+
+      sahDurum = tahta.sahVarMi(eskiOyunSirasi);
+
+      if(sahDurum == true){
+        // Kopyalanan orijinale atanir :
+        tahta.setTaslar(taslarKopya);
+        cout << "Şahınızı kurtarmanız lazım !" << endl;
+
+        // Mac için seslendirme :
+        system("say Şahınızı kurtarmanız lazım !");
+
+        oynamaTamamMi = false;
+      }else{
+        //Dogru oynanmis mi :
+        oynamaTamamMi = true;
+      }
+
+    }else{
+      //Dogru oynanmis mi :
+      oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
+
+    }
 
     // Mac icin ekran temizleme:
     system("clear");
 
   }while(!oynamaTamamMi);
 
+    sahDurum = tahta.sahVarMi(oyunSirasi);
+
     // Sah mı ?
-    if(tahta.sahVarMi(oyunSirasi)){
+    if(sahDurum){
       cout << "Şah !" << endl;
 
       // Mac için seslendirme :

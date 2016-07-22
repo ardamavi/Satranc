@@ -8,6 +8,7 @@
 
 using namespace std;
 
+  // Taşın görsel halini döner (Unicode) :
   string Tas::tasKisaltmasi(){
 
   string kisaltma = " ";
@@ -74,6 +75,14 @@ Tas::Tas(takim renk, string adi, int x, int y){
     this->renk = renk;
     this->adi = adi;
     this->konum = make_pair(x, y);
+}
+
+Tas::Tas(Tas &tas)
+{
+  Tas tmp(tas.renk, tas.adi, tas.konum.first, tas.konum.second);
+  this->renk = tmp.renk;
+  this->adi = tmp.adi;
+  this->konum = tmp.konum;
 }
 
 pair<int, int> Tas::getKonum() {

@@ -136,12 +136,17 @@ void Tahta::tasEkle(Tas* tas){
 this->taslar.push_back(tas);
 }
 
+void Tahta::setTaslar(vector<Tas*> gelenTaslar){
+  this->taslar.clear();
+  this->taslar = gelenTaslar;
+}
+
 bool Tahta::tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMi, int tasSira){
 this->taslar[tasSira]->setKonum(gidilecekYer);
 // Burada rakip tas var ise, erase et :
-if(rakiptasVarMi){
-  this->taslar.erase(this->taslar.begin() + rakipTasSira);
-}
+  if(rakiptasVarMi){
+    this->taslar.erase(this->taslar.begin() + rakipTasSira);
+  }
 return true;
 }
 
@@ -177,7 +182,6 @@ for (int j = 0; j < this->taslar.size(); j++) {
         break;
     }
 }
-
 if(this->taslar[tasSira]->getAdi() == "Piyon"){
   if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
       return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
