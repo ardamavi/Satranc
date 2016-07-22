@@ -85,6 +85,13 @@ Tas::Tas(Tas &tas)
   this->konum = tmp.konum;
 }
 
+/*Tas::~Tas()
+{
+  delete this->konum;
+  delete this->renk;
+  delete this->adi;
+}*/
+
 pair<int, int> Tas::getKonum() {
     return this->konum;
 }

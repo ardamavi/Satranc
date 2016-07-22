@@ -28,6 +28,8 @@ class Tas{
 
         Tas(Tas &tas);
 
+        //~Tas();
+
         string tasKisaltmasi();
 
         pair<int, int> getKonum();

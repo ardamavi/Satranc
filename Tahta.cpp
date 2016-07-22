@@ -137,8 +137,14 @@ this->taslar.push_back(tas);
 }
 
 void Tahta::setTaslar(vector<Tas*> gelenTaslar){
+  for (int i = 0; i < this->taslar.size(); i++)
+  {
+    delete(this->taslar[i]);
+  }
   this->taslar.clear();
-  this->taslar = gelenTaslar;
+  for (int i = 0; i < gelenTaslar.size(); i++) {
+    this->taslar.push_back(new Tas(*(gelenTaslar[i])));
+  }
 }
 
 bool Tahta::tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMi, int tasSira){

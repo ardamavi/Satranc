@@ -92,22 +92,23 @@ int main(){
     oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
     oynanacakYer.second = harfToSayi(oynanacakYerChar[1]);
 
+    string eskiOyunSirasi;
+
+    if(oyunSirasi == "Beyaz"){
+      eskiOyunSirasi = "Siyah";
+    }else if(oyunSirasi == "Siyah"){
+      eskiOyunSirasi = "Beyaz";
+    }
+
+    vector<Tas*> taslarKopya;
+
+    // Taşlar kopyalanır:
+    for (int i = 0; i < tahta.getTaslar()->size(); i++) {
+      taslarKopya.push_back(new Tas(*(*(tahta.getTaslar()))[i]));
+    }
+
+
     if(sahDurum == true){
-
-      string eskiOyunSirasi;
-
-      if(oyunSirasi == "Beyaz"){
-        eskiOyunSirasi = "Siyah";
-      }else if(oyunSirasi == "Siyah"){
-        eskiOyunSirasi = "Beyaz";
-      }
-
-      vector<Tas*> taslarKopya;
-
-      // Taşlar kopyalanır:
-      for (int i = 0; i < tahta.getTaslar()->size(); i++) {
-        taslarKopya.push_back(new Tas(*(*(tahta.getTaslar()))[i]));
-      }
 
       tahta.hareketEt(oyunSirasi, tasinKonumu, oynanacakYer);
 
@@ -131,11 +132,24 @@ int main(){
       //Dogru oynanmis mi :
       oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
 
+      if(tahta.sahVarMi(eskiOyunSirasi)){
+        oynamaTamamMi = false;
+        cout << "Şahınızı tehlikeye atamazsınız !" << endl;
+
+        tahta.setTaslar(taslarKopya);
+
+        // Mac için seslendirme :
+        system("say Şahınızı tehlikeye atamazsınız !");
+      }
     }
 
     // Mac icin ekran temizleme:
     system("clear");
-
+    for (int i = 0; i < taslarKopya.size(); i++)
+    {
+      delete(taslarKopya[i]);
+    }
+    taslarKopya.clear();
   }while(!oynamaTamamMi);
 
     sahDurum = tahta.sahVarMi(oyunSirasi);
