@@ -164,6 +164,11 @@ return true;
 // 5. Eger gittigi yerde baska bir rakip tas varsa, onu yok et.
 bool Tahta::hareketEt(string oyuncuSirasi, pair <int, int> tasKonum, pair <int, int> gidilecekYer){
 
+  if(gidilecekYer.first<0 || gidilecekYer.first>7 || gidilecekYer.second<0 || gidilecekYer.second>7){
+    // Tahtanın sınırlarının içindeyse
+    return false;
+  }
+
 int tasSira;
 
 for (int i = 0; i < this->taslar.size(); i++) {
@@ -217,72 +222,135 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
 return false;
 }
 
-bool Tahta::sahVarMi(string hareketEdenTakim){
+pair<int, int> Tahta::rakipTakimSahKonum(takim hareketEdenTakimKim){
 
-  pair <int, int> karsiTakimSahKonum;
-  int i = 0;
-  takim hareketEdenTakimKim;
-
-  if(hareketEdenTakim == "Beyaz"){
-    hareketEdenTakimKim = beyaz;
-  }else{
-    hareketEdenTakimKim = siyah;
-  }
-
-  for (i  = 0; i < taslar.size(); i++) {
+  for (int i  = 0; i < taslar.size(); i++) {
     if(taslar[i]->getTakim() == hareketEdenTakimKim){
       continue;
     }
 
     if(taslar[i]->getAdi() == "Sah"){
-      karsiTakimSahKonum = taslar[i]->getKonum();
-      break;
+      return taslar[i]->getKonum();
+    }
+  }
+  return make_pair(0, 0);
+}
+
+int Tahta::rakipTakimSahSira(takim hareketEdenTakimKim)
+{
+  pair<int, int> takimSahKonum;
+
+  for (int i  = 0; i < taslar.size(); i++) {
+    if(taslar[i]->getTakim() == hareketEdenTakimKim){
+      continue;
     }
 
+    if(taslar[i]->getAdi() == "Sah"){
+      return i;
+    }
   }
+  return 0;
+}
 
-  for(i = 0; i < taslar.size(); i++){
+pair<bool, int> Tahta::tehditVarMi(takim hareketEdenTakimKim){
+  for(int i = 0; i < taslar.size(); i++){
 
     if(taslar[i]->getTakim() != hareketEdenTakimKim){
       continue;
     }
 
     if(this->taslar[i]->getAdi() == "Piyon"){
-      if (((Piyon*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
-        // Sah varsa true doner :
-          return true;
+      if (((Piyon*)this->taslar[i])->yolKntrl(taslar, rakipTakimSahKonum(hareketEdenTakimKim))) {
+          return make_pair(true, i);
       }
     }else if(taslar[i]->getAdi() == "Kale"){
-      if (((Kale*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
-        // Sah varsa true doner :
-          return true;
+      if (((Kale*)this->taslar[i])->yolKntrl(taslar, rakipTakimSahKonum(hareketEdenTakimKim))) {
+          return make_pair(true, i);
       }
     }else if(taslar[i]->getAdi() == "At"){
-      if (((At*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
-        // Sah varsa true doner :
-          return true;
+      if (((At*)this->taslar[i])->yolKntrl(taslar, rakipTakimSahKonum(hareketEdenTakimKim))) {
+          return make_pair(true, i);
       }
     }else if(taslar[i]->getAdi() == "Fil"){
-      if (((Fil*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
-        // Sah varsa true doner :
-          return true;
+      if (((Fil*)this->taslar[i])->yolKntrl(taslar, rakipTakimSahKonum(hareketEdenTakimKim))) {
+          return make_pair(true, i);
       }
     }else if(taslar[i]->getAdi() == "Vezir"){
-      if (((Vezir*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
-        // Sah varsa true doner :
-          return true;
-      }
-    }else if(taslar[i]->getAdi() == "Sah"){
-      if (((Sah*)this->taslar[i])->yolKntrl(taslar, karsiTakimSahKonum)) {
-        // Sah varsa true doner :
-          return true;
+      if (((Vezir*)this->taslar[i])->yolKntrl(taslar, rakipTakimSahKonum(hareketEdenTakimKim))) {
+        return make_pair(true, i);
       }
     }
+  }
+
+  return make_pair(false, 0);
+
+}
+
+bool Tahta::sahVarMi(takim hareketEdenTakim){
+
+  return (tehditVarMi(hareketEdenTakim)).first;
 
   }
 
-// Sah yok :
+bool Tahta::sahMatMi(takim hareketEdenTakim, int tehditSira){
 
-return false;
+  // Şah kurtarılabilir mi ? :
+  // Çevrede taş yoksa ve oraya gidince şah olmuyorsa return false :
 
+  bool konumBosMu = true;
+  string strSahTakim;
+
+  if(hareketEdenTakim == beyaz){
+    strSahTakim = "Siyah";
+  }else{
+    strSahTakim = "Beyaz";
+  }
+  pair <int, int> sahKonum = rakipTakimSahKonum(hareketEdenTakim);
+
+  vector<Tas*> taslarKopya;
+  int sahSira = rakipTakimSahSira(hareketEdenTakim);
+
+  for(int x = (sahKonum.first-1); x <= (sahKonum.first+1); x++){
+
+    for(int y = (sahKonum.second-1); y <= (sahKonum.second+1); y++){
+
+      if(((Sah*)this->taslar[sahSira])->yolKntrl(this->taslar, make_pair(x,y))){
+
+        for (int i = 0; i < taslarKopya.size(); i++)
+        {
+          delete(taslarKopya[i]);
+        }
+        taslarKopya.clear();
+        // Taşlar kopyalanır:
+        for (int i = 0; i < getTaslar()->size(); i++) {
+          taslarKopya.push_back(new Tas(*(*(getTaslar()))[i]));
+        }
+        if(hareketEt(strSahTakim, sahKonum, make_pair(x,y)) && sahVarMi(hareketEdenTakim) == false){
+          setTaslar(taslarKopya);
+          return false;
+        }
+
+        setTaslar(taslarKopya);
+      }
+    }
+  }
+
+
+  // Eğer şah çeken at değilse :
+  if (taslar[tehditSira]->getAdi() != "At") {
+    // Araya taş girebilir mi ? :
+
+  }
+
+  // Şah çeken taşı yiyebilen taş var mı ? :
+
+// Taşlar Kopya temizleme :
+  for (int i = 0; i < taslarKopya.size(); i++)
+  {
+    delete(taslarKopya[i]);
+  }
+  taslarKopya.clear();
+
+  // Hiçbirine takılmadıysa Şah Mat olur.
+  return true;
 }

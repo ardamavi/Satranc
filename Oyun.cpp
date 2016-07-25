@@ -59,6 +59,8 @@ int main(){
     }
 
     bool oynamaTamamMi = true;
+    takim takimOyunSirasi;
+    takim takimEskiOyunSirasi;
 
     do{
 
@@ -95,9 +97,13 @@ int main(){
     string eskiOyunSirasi;
 
     if(oyunSirasi == "Beyaz"){
+      takimOyunSirasi = beyaz;
       eskiOyunSirasi = "Siyah";
+      takimEskiOyunSirasi = siyah;
     }else if(oyunSirasi == "Siyah"){
+      takimOyunSirasi = siyah;
       eskiOyunSirasi = "Beyaz";
+      takimEskiOyunSirasi = beyaz;
     }
 
     vector<Tas*> taslarKopya;
@@ -112,7 +118,7 @@ int main(){
 
       tahta.hareketEt(oyunSirasi, tasinKonumu, oynanacakYer);
 
-      sahDurum = tahta.sahVarMi(eskiOyunSirasi);
+      sahDurum = tahta.sahVarMi(takimEskiOyunSirasi);
 
       if(sahDurum == true){
         // Kopyalanan orijinale atanir :
@@ -132,7 +138,7 @@ int main(){
       //Dogru oynanmis mi :
       oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
 
-      if(tahta.sahVarMi(eskiOyunSirasi)){
+      if(tahta.sahVarMi(takimEskiOyunSirasi)){
         oynamaTamamMi = false;
         cout << "Şahınızı tehlikeye atamazsınız !" << endl;
 
@@ -145,6 +151,7 @@ int main(){
 
     // Mac icin ekran temizleme:
     system("clear");
+
     for (int i = 0; i < taslarKopya.size(); i++)
     {
       delete(taslarKopya[i]);
@@ -152,7 +159,8 @@ int main(){
     taslarKopya.clear();
   }while(!oynamaTamamMi);
 
-    sahDurum = tahta.sahVarMi(oyunSirasi);
+    // Şah ve mat var mı ?
+    sahDurum = tahta.sahVarMi(takimOyunSirasi);
 
     // Sah mı ?
     if(sahDurum){
@@ -160,6 +168,14 @@ int main(){
 
       // Mac için seslendirme :
       system("say Şah !");
+
+
+      if(tahta.sahMatMi(takimOyunSirasi, tahta.tehditVarMi(takimOyunSirasi).second)){
+        // Mat oldu !
+        cout << "Mat !" << endl;
+        system("say Mat !");
+      }
+
     }
 
   }while(kazanan == "Yok");
@@ -167,7 +183,7 @@ int main(){
   // Tahta Silinir ve Cizilir:
   tahta.tahtaCiz();
 
-  cout << "\nKazanan: " << kazanan << "\nOyun Bitti\n" << endl;
+  cout << "\nOyun Bitti\n" << "\nKazanan: " << kazanan << endl;
 
   // Mac icin oyunun bitimini sesli haber verme:
   system("say Oyun bitti !");

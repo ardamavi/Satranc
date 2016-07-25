@@ -25,8 +25,6 @@ bool Sah::sahaYakinMi(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             continue;
         }
 
-        // Burada kaladin :
-
         // Cevredeyse :
             for (int a = -1; a < 2; a++) {
                 // Satir Kontrol :

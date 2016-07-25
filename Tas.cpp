@@ -13,9 +13,6 @@ using namespace std;
 
   string kisaltma = " ";
 
-  if(this->renk == 1){
-    // renk beyaz:
-
     // Unicode :
     switch (adi[0]) {
       case 'P':
@@ -37,33 +34,6 @@ using namespace std;
       kisaltma += "\u265A";
       break;
     }
-
-  }else{
-    // renk siyah:
-
-    // Unicode :
-    switch (adi[0]) {
-      case 'P':
-      kisaltma += "\u265F";
-      break;
-      case 'K':
-      kisaltma += "\u265C";
-      break;
-      case 'A':
-      kisaltma += "\u265E";
-      break;
-      case 'F':
-      kisaltma += "\u265D";
-      break;
-      case 'V':
-      kisaltma += "\u265B";
-      break;
-      case 'S':
-      kisaltma += "\u265A";
-      break;
-    }
-
-  }
 
   kisaltma += " ";
 

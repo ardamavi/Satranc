@@ -28,7 +28,15 @@ class Tahta {
 
     bool hareketEt(string, pair <int, int> , pair <int, int>);
 
-    bool sahVarMi(string);
+    pair<int, int> rakipTakimSahKonum(takim);
+
+    int rakipTakimSahSira(takim);
+
+    pair<bool, int> tehditVarMi(takim);
+
+    bool sahMatMi(takim, int);
+
+    bool sahVarMi(takim);
 
 };
 
