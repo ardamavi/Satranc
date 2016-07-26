@@ -12,14 +12,14 @@ bool Piyon::vezirOlsunMu(takim renk,pair <int, int> gidilecekYer){
 
     if(renk == beyaz){
         // Tasin rengi beyaz ise:
-        if(gidilecekYer.first == 0){
+        if(gidilecekYer.first == 7){
             return true;
         } else{
             return false;
         }
     }else{
         // Tasin rengi siyah ise:
-        if(gidilecekYer.first == 7){
+        if(gidilecekYer.first == 0){
             return true;
         } else{
             return false;

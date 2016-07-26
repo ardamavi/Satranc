@@ -195,7 +195,13 @@ for (int j = 0; j < this->taslar.size(); j++) {
 }
 if(this->taslar[tasSira]->getAdi() == "Piyon"){
   if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
-      return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
+     this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
+     if (((Piyon*)this->taslar[tasSira])->vezirOlsunMu(this->taslar[tasSira]->getTakim(), gidilecekYer)){
+       this->taslar.push_back(new Vezir(this->taslar[tasSira]->getTakim(), this->taslar[tasSira]->getKonum().first, this->taslar[tasSira]->getKonum().second));
+       delete(this->taslar[tasSira]);
+       this->taslar.erase(this->taslar.begin()+tasSira);
+     }
+     return true;
   }
 }else if(taslar[tasSira]->getAdi() == "Kale"){
   if (((Kale*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {

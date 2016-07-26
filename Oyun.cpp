@@ -174,6 +174,8 @@ int main(){
         // Mat oldu !
         cout << "Mat !" << endl;
         system("say Mat !");
+
+        kazanan = oyunSirasi;
       }
 
     }
@@ -182,6 +184,8 @@ int main(){
 
   // Tahta Silinir ve Cizilir:
   tahta.tahtaCiz();
+
+  cout << defaultColorbg << defaultColorfg;
 
   cout << "\nOyun Bitti\n" << "\nKazanan: " << kazanan << endl;
 
