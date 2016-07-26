@@ -170,7 +170,7 @@ int main(){
       system("say Şah !");
 
 
-      if(tahta.sahMatMi(takimOyunSirasi, tahta.tehditVarMi(takimOyunSirasi).second)){
+      if(tahta.sahMatMi(takimOyunSirasi, tahta.tehditVarMi(tahta.rakipTakimSahKonum(takimOyunSirasi), takimOyunSirasi).second)){
         // Mat oldu !
         cout << "Mat !" << endl;
         system("say Mat !");

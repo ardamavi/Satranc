@@ -32,7 +32,7 @@ class Tahta {
 
     int rakipTakimSahSira(takim);
 
-    pair<bool, int> tehditVarMi(takim);
+    pair<bool, int> tehditVarMi(pair<int, int>, takim);
 
     bool sahMatMi(takim, int);
 
