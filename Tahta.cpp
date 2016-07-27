@@ -26,6 +26,10 @@ using namespace std;
 
 
 Tahta::Tahta(){
+
+    beyazRok = make_pair(true, true);
+    siyahRok = make_pair(true, true);
+
     int satir = 1;
     takim renk = beyaz;
     for (int i = 0; i < 8; i++){
@@ -205,6 +209,25 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
   }
 }else if(taslar[tasSira]->getAdi() == "Kale"){
   if (((Kale*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+
+    if(this->taslar[tasSira]->getTakim() == beyaz){
+      if(this->taslar[tasSira]->getKonum().second == 0){
+        // Soldaki
+        beyazRok.second = false;
+      }else{
+        // Sağdaki
+        beyazRok.first = false;
+      }
+    }else if(this->taslar[tasSira]->getTakim() == siyah){
+      if(this->taslar[tasSira]->getKonum().second == 0){
+        // Soldaki
+        siyahRok.second = false;
+      }else{
+        // Sağdaki
+        siyahRok.first = false;
+      }
+    }
+
       return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
   }
 }else if(taslar[tasSira]->getAdi() == "At"){
@@ -221,6 +244,11 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
   }
 }else if(taslar[tasSira]->getAdi() == "Sah"){
   if (((Sah*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+      if(this->taslar[tasSira]->getTakim() == beyaz){
+        beyazRok = make_pair(false, false);
+      }else if(this->taslar[tasSira]->getTakim() == siyah){
+        siyahRok = make_pair(false, false);
+      }
       return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
   }
 }
@@ -436,5 +464,126 @@ bool Tahta::sahMatMi(takim hareketEdenTakim, int tehditSira){
   taslarKopya.clear();
 
   // Hiçbirine takılmadıysa Şah Mat olur.
+  return true;
+}
+
+bool Tahta::rokYapma(string oyunSirasi, string hangiRok){
+
+  // Taşlar oynanmış mı ? :
+  if (karsilastir(hangiRok, KISA_ROK, 8) == true) {
+    // Kısa Rok:
+    if(oyunSirasi == "Beyaz"){
+      // Beyaz :
+      if(beyazRok.first == false){
+        return false;
+      }
+
+      for(int x = 0, y = 5; y < 7; y++){
+        for (int i = 0; i < taslar.size(); i++) {
+          if(taslar[i]->getKonum() == make_pair(x, y)){
+            return false;
+          }
+        }
+      }
+
+      for (int i = 0; i < taslar.size(); i++) {
+        if(taslar[i]->getKonum() == make_pair(0, 7)){
+          taslar[i]->setKonum(make_pair(0, 5));
+        }else if(taslar[i]->getKonum() == make_pair(0, 4)){
+          taslar[i]->setKonum(make_pair(0, 6));
+        }else{
+          continue;
+        }
+      }
+
+    }else{
+      // Siyah :
+      if(siyahRok.first == false){
+        return false;
+      }
+
+      for(int x = 7, y = 5; y < 7; y++){
+        for (int i = 0; i < taslar.size(); i++) {
+          if(taslar[i]->getKonum() == make_pair(x, y)){
+            return false;
+          }
+        }
+      }
+
+      for (int i = 0; i < taslar.size(); i++) {
+        if(taslar[i]->getKonum() == make_pair(7, 7)){
+          taslar[i]->setKonum(make_pair(7, 5));
+        }else if(taslar[i]->getKonum() == make_pair(7, 4)){
+          taslar[i]->setKonum(make_pair(7, 6));
+        }else{
+          continue;
+        }
+      }
+
+    }
+  }else{
+    // Uzun Rok:
+    if(oyunSirasi == "Beyaz"){
+      // Beyaz :
+      if(beyazRok.second == false){
+        return false;
+      }
+
+      for(int x = 0, y = 1; y < 4; y++){
+        for (int i = 0; i < taslar.size(); i++) {
+          if(taslar[i]->getKonum() == make_pair(x, y)){
+            return false;
+          }
+        }
+      }
+
+      for (int i = 0; i < taslar.size(); i++) {
+        if(taslar[i]->getKonum() == make_pair(0, 0)){
+          taslar[i]->setKonum(make_pair(0, 3));
+        }else if(taslar[i]->getKonum() == make_pair(0, 4)){
+          taslar[i]->setKonum(make_pair(0, 2));
+        }else{
+          continue;
+        }
+      }
+
+    }else{
+      // Siyah :
+      if(siyahRok.second == false){
+        return false;
+      }
+
+      for(int x = 7, y = 1; y < 4; y++){
+        for (int i = 0; i < taslar.size(); i++) {
+          if(taslar[i]->getKonum() == make_pair(x, y)){
+            return false;
+          }
+        }
+      }
+
+      for (int i = 0; i < taslar.size(); i++) {
+        if(taslar[i]->getKonum() == make_pair(7, 0)){
+          taslar[i]->setKonum(make_pair(7, 3));
+        }else if(taslar[i]->getKonum() == make_pair(7, 4)){
+          taslar[i]->setKonum(make_pair(7, 2));
+        }else{
+          continue;
+        }
+      }
+
+    }
+  }
+
+  return true;
+}
+
+bool Tahta::karsilastir(string str1, string str2, int karakterSayisi){
+
+  for (int i = 0; i < karakterSayisi; i++) {
+    if(str1[i] != str2[i]){
+      return false;
+    }
+  }
+
   return true;
 }

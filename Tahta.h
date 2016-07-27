@@ -6,17 +6,26 @@
 #include "Tas.h"
 #include <utility>
 
+const string KISA_ROK = "kısa rok";
+const string UZUN_ROK = "uzun rok";  
+
 class Tahta {
     private:
         string tahta[8][8];
         vector <Tas*> taslar;
 
     public:
-        Tahta();
 
-        void tahtaSil();
+    // First: Kısa && Second: Uzun
+    pair<bool, bool> beyazRok;
 
-        void tahtaCiz();
+    pair<bool, bool> siyahRok;
+
+    Tahta();
+
+    void tahtaSil();
+
+    void tahtaCiz();
 
     vector<Tas*>* getTaslar();
 
@@ -37,6 +46,10 @@ class Tahta {
     bool sahMatMi(takim, int);
 
     bool sahVarMi(takim);
+
+    bool rokYapma(string, string);
+
+    bool karsilastir(string, string, int);
 
 };
 

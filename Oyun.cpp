@@ -1,6 +1,7 @@
 // Arda Mavi - ardamavi.com
 
 #include <iostream>
+#include <string>
 #include <utility>
 #include "Color.h" // namespace Color
 #include "Tahta.h"
@@ -32,13 +33,11 @@ int main(){
 
     system("clear");
 
-    // Mac için seslendirme:
-    //system("say Arda Mavi nin Satranç oyununa hoş geldiniz");
-
     cout << defaultColorbg << defaultColorfg;
 
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e" << endl;
+    cout << "Rok girişleri için: \"uzun rok\" ya da \"kısa rok\" diye yazmalısınız." << endl;
     cout << "Oyundan çıkış: kntrl c\n" << endl;
 
     string kazanan = "Yok";
@@ -82,18 +81,6 @@ int main(){
       system("say Oyun sırası siyah takımda");
     }
 
-    char tasinKonumuChar[3];
-    cout << "\nTaşın Konumunu giriniz: ";
-    cin >> tasinKonumuChar;
-    tasinKonumu.first = sayiCharToSayi(tasinKonumuChar[0]);
-    tasinKonumu.second = harfToSayi(tasinKonumuChar[1]);
-
-    char oynanacakYerChar[3];
-    cout << "\nTaşı Oynayacağınız Konumu Giriniz: ";
-    cin >> oynanacakYerChar;
-    oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
-    oynanacakYer.second = harfToSayi(oynanacakYerChar[1]);
-
     string eskiOyunSirasi;
 
     if(oyunSirasi == "Beyaz"){
@@ -113,10 +100,28 @@ int main(){
       taslarKopya.push_back(new Tas(*(*(tahta.getTaslar()))[i]));
     }
 
+    string tasinKonumuChar;
+    cout << "\nTaşın Konumunu giriniz: ";
+    getline(cin, tasinKonumuChar);
+
+    if(tahta.karsilastir(tasinKonumuChar, KISA_ROK, 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
+    tasinKonumu.first = sayiCharToSayi(tasinKonumuChar[0]);
+    tasinKonumu.second = harfToSayi(tasinKonumuChar[1]);
+
+      string oynanacakYerChar;
+      cout << "\nTaşı Oynayacağınız Konumu Giriniz: ";
+      getline(cin, oynanacakYerChar);
+      oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
+      oynanacakYer.second = harfToSayi(oynanacakYerChar[1]);
+    }
 
     if(sahDurum == true){
 
-      tahta.hareketEt(oyunSirasi, tasinKonumu, oynanacakYer);
+      if(tahta.karsilastir(tasinKonumuChar, KISA_ROK, 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
+        tahta.hareketEt(oyunSirasi, tasinKonumu, oynanacakYer);
+      }else{
+        tahta.rokYapma(oyunSirasi, tasinKonumuChar);
+      }
 
       sahDurum = tahta.sahVarMi(takimEskiOyunSirasi);
 
@@ -135,8 +140,13 @@ int main(){
       }
 
     }else{
-      //Dogru oynanmis mi :
-      oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
+
+      if(tahta.karsilastir(tasinKonumuChar, "kısa rok", 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
+        //Dogru oynanmis mi :
+        oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
+      }else{
+        oynamaTamamMi = tahta.rokYapma(oyunSirasi, tasinKonumuChar);
+      }
 
       if(tahta.sahVarMi(takimEskiOyunSirasi)){
         oynamaTamamMi = false;
