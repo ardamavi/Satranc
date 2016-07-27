@@ -67,7 +67,7 @@ Tahta::Tahta(){
     taslar.push_back(new Fil(renk, satir, sutun++));
     taslar.push_back(new At(renk, satir, sutun++));
     taslar.push_back(new Kale(renk, satir, sutun++));
-
+    
 }
 
 void Tahta::tahtaSil(){
@@ -584,6 +584,55 @@ bool Tahta::karsilastir(string str1, string str2, int karakterSayisi){
       return false;
     }
   }
+
+  return true;
+}
+
+bool Tahta::patMi(takim oyunSirasi){
+
+  string strOyunSirasi;
+
+  if(oyunSirasi == beyaz){
+    oyunSirasi = siyah;
+    strOyunSirasi = "Siyah";
+  }else{
+    oyunSirasi = beyaz;
+    strOyunSirasi = "Beyaz";
+  }
+
+  vector<Tas*> taslarKopya;
+
+  for (int x = 0; x < 8; x++) {
+    for (int y = 0; y < 8; y++) {
+
+    if(tehditVarMi(make_pair(x, y), oyunSirasi).first){
+
+      // Taşlar kopyalanır:
+      for (int i = 0; i < getTaslar()->size(); i++) {
+        taslarKopya.push_back(new Tas(*(*(getTaslar()))[i]));
+      }
+
+      if(hareketEt(strOyunSirasi, taslar[(tehditVarMi(make_pair(x, y), oyunSirasi).second)]->getKonum(), make_pair(x, y)) && !(sahVarMi(oyunSirasi))){
+        setTaslar(taslarKopya);
+        return false;
+      }else{
+        setTaslar(taslarKopya);
+      }
+
+      for (int i = 0; i < taslarKopya.size(); i++)
+      {
+        delete(taslarKopya[i]);
+      }
+      taslarKopya.clear();
+
+    }
+   }
+  }
+
+  cout << "Pat !" << endl;
+
+  // Mac için seslendirme :
+  system("say Pat!");
 
   return true;
 }

@@ -190,6 +190,10 @@ int main(){
 
     }
 
+    if(kazanan == "Yok" && tahta.patMi(takimOyunSirasi)){
+      kazanan = "Berabere";
+    }
+
   }while(kazanan == "Yok");
 
   // Tahta Silinir ve Cizilir:
@@ -201,13 +205,14 @@ int main(){
 
   // Mac icin oyunun bitimini sesli haber verme:
   system("say Oyun bitti !");
-  system("say Kazanan: ");
 
   // Mac icin kazanan seslendirme:
   if(kazanan == "Beyaz"){
     system("say Kazanan Beyaz takım!");
   }else if(kazanan == "Siyah"){
     system("say Kazanan Siyah takım!");
+  }else if(kazanan == "Berabere"){
+    system("say Kazanan yok! Berabere!");
   }else{
     system("say Kazanan yok!");
   }

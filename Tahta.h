@@ -7,7 +7,7 @@
 #include <utility>
 
 const string KISA_ROK = "kısa rok";
-const string UZUN_ROK = "uzun rok";  
+const string UZUN_ROK = "uzun rok";
 
 class Tahta {
     private:
@@ -50,6 +50,8 @@ class Tahta {
     bool rokYapma(string, string);
 
     bool karsilastir(string, string, int);
+
+    bool patMi(takim);
 
 };
 
