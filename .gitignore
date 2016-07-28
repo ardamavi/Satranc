@@ -27,6 +27,7 @@
 *.exe
 *.out
 *.app
+Satranç
 
 # CLion IDE's
 CMakeLists.txt
