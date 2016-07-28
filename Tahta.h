@@ -14,6 +14,9 @@ class Tahta {
         string tahta[8][8];
         vector <Tas*> taslar;
 
+        // 50 hamle kuralı icin :
+        int geriSayim;
+
     public:
 
     // First: Kısa && Second: Uzun
@@ -52,6 +55,10 @@ class Tahta {
     bool karsilastir(string, string, int);
 
     bool patMi(takim);
+
+    int getGeriSayim();
+
+    void setGeriSayim(int);
 
 };
 

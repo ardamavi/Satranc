@@ -30,6 +30,9 @@ Tahta::Tahta(){
     beyazRok = make_pair(true, true);
     siyahRok = make_pair(true, true);
 
+    // 50 hamle kuralı için :
+    this->geriSayim = 50;
+
     int satir = 1;
     takim renk = beyaz;
     for (int i = 0; i < 8; i++){
@@ -67,7 +70,7 @@ Tahta::Tahta(){
     taslar.push_back(new Fil(renk, satir, sutun++));
     taslar.push_back(new At(renk, satir, sutun++));
     taslar.push_back(new Kale(renk, satir, sutun++));
-    
+
 }
 
 void Tahta::tahtaSil(){
@@ -635,4 +638,12 @@ bool Tahta::patMi(takim oyunSirasi){
   system("say Pat!");
 
   return true;
+}
+
+int Tahta::getGeriSayim(){
+  return this->geriSayim;
+}
+
+void Tahta::setGeriSayim(int sayac){
+  this->geriSayim = sayac;
 }

@@ -45,6 +45,7 @@ int main(){
     pair <int, int> tasinKonumu;
     pair <int, int> oynanacakYer;
     bool sahDurum = false;
+    int eskiTaslarSize;
 
     Tahta tahta;
 
@@ -99,6 +100,8 @@ int main(){
     for (int i = 0; i < tahta.getTaslar()->size(); i++) {
       taslarKopya.push_back(new Tas(*(*(tahta.getTaslar()))[i]));
     }
+
+    eskiTaslarSize = tahta.getTaslar()->size();
 
     string tasinKonumuChar;
     cout << "\nTaşın Konumunu giriniz: ";
@@ -192,6 +195,25 @@ int main(){
 
     if(kazanan == "Yok" && tahta.patMi(takimOyunSirasi)){
       kazanan = "Berabere";
+    }
+
+    if(tahta.getGeriSayim() <= 1){
+      cout << "50 adım kuralından dolayı oyun berabere bitmiştir !" << endl;
+      kazanan = "Berabere";
+    }
+
+    tahta.setGeriSayim(tahta.getGeriSayim()-1);
+
+    string oynayanTas;
+
+    for (int i = 0; i < tahta.getTaslar()->size(); i++) {
+      if((*(tahta.getTaslar()))[i]->getKonum() == oynanacakYer){
+        oynayanTas = (*(tahta.getTaslar()))[i]->getAdi();
+      }
+    }
+
+    if((tahta.getTaslar()->size() != eskiTaslarSize) || oynayanTas == "Piyon"){
+      tahta.setGeriSayim(50);
     }
 
   }while(kazanan == "Yok");
