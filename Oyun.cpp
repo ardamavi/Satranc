@@ -126,6 +126,12 @@ int main(){
     if(tahta.karsilastir(tasinKonumuChar, KISA_ROK, 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
       // Eğer rok yapılmak istenmiyorsa :
 
+      if(!(((0 <= sayiCharToSayi(tasinKonumuChar[0])) && (sayiCharToSayi(tasinKonumuChar[0])) < 8) && ((0 <= harfToSayi(tasinKonumuChar[1])) && (harfToSayi(tasinKonumuChar[1]) < 8)))){
+        oynamaTamamMi = false;
+        system("clear");
+        continue;
+      }
+
       // Tasın konumu pair olarak tutulur :
       tasinKonumu.first = sayiCharToSayi(tasinKonumuChar[0]);
       tasinKonumu.second = harfToSayi(tasinKonumuChar[1]);
@@ -134,6 +140,12 @@ int main(){
       string oynanacakYerChar;
       cout << "\nTaşı Oynayacağınız Konumu Giriniz: ";
       getline(cin, oynanacakYerChar);
+
+      if(!(((0 <= sayiCharToSayi(oynanacakYerChar[0])) && (sayiCharToSayi(oynanacakYerChar[0])) < 8) && ((0 <= harfToSayi(oynanacakYerChar[1])) && (harfToSayi(oynanacakYerChar[1]) < 8)))){
+        oynamaTamamMi = false;
+        system("clear");
+        continue;
+      }
 
       // oynanacak yerin konumu pair olarak tutulur :
       oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
