@@ -201,7 +201,7 @@ for (int j = 0; j < this->taslar.size(); j++) {
     }
 }
 if(this->taslar[tasSira]->getAdi() == "Piyon"){
-  if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+  if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer, *this)) {
      this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
      if (((Piyon*)this->taslar[tasSira])->vezirOlsunMu(this->taslar[tasSira]->getTakim(), gidilecekYer)){
        this->taslar.push_back(new Vezir(this->taslar[tasSira]->getTakim(), this->taslar[tasSira]->getKonum().first, this->taslar[tasSira]->getKonum().second));
@@ -297,7 +297,7 @@ pair<bool, int> Tahta::tehditVarMi(pair<int, int> gidilecekYer, takim hareketEde
     }
 
     if(this->taslar[i]->getAdi() == "Piyon"){
-      if (((Piyon*)this->taslar[i])->yolKntrl(taslar, gidilecekYer)) {
+      if (((Piyon*)this->taslar[i])->yolKntrl(taslar, gidilecekYer, *this)) {
           return make_pair(true, i);
       }
     }else if(taslar[i]->getAdi() == "Kale"){
@@ -646,4 +646,12 @@ int Tahta::getGeriSayim(){
 
 void Tahta::setGeriSayim(int sayac){
   this->geriSayim = sayac;
+}
+
+pair<pair<int, int>, takim> Tahta::getGecerkenAlma(){
+  return this->gecerkenAlma;
+}
+
+void Tahta::setGecerkenAlma(pair<int, int> gectigiYer, takim renk){
+  this->gecerkenAlma = make_pair( gectigiYer, renk );
 }

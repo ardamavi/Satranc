@@ -17,6 +17,9 @@ class Tahta {
         // 50 hamle kuralı icin :
         int geriSayim;
 
+        // En passant kuralı için :
+        pair<pair<int, int>, takim> gecerkenAlma;
+
     public:
 
     // First: Kısa && Second: Uzun
@@ -59,6 +62,10 @@ class Tahta {
     int getGeriSayim();
 
     void setGeriSayim(int);
+
+    pair<pair<int, int>, takim> getGecerkenAlma();
+
+    void setGecerkenAlma(pair<int, int>, takim);
 
 };
 

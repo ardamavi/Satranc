@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Tas.h"
 #include "Piyon.h"
+#include "Tahta.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ bool Piyon::vezirOlsunMu(takim renk,pair <int, int> gidilecekYer){
 
 }
 
-bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer){
+bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer, Tahta tahta){
     // benim konumum this->konum
     //taslar[i].konum
 
@@ -110,7 +111,9 @@ bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer){
                 }
             }
         }
-        return false;
+        if(tahta.getGecerkenAlma().second == yok){
+          return false;
+        }
 
     } else if(gidilecekYer == make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second+ (1 * yon))){
         // Eger çaprazi doluysa:
@@ -127,7 +130,9 @@ bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer){
                 }
             }
         }
-        return false;
+        if(tahta.getGecerkenAlma().second == yok){
+          return false;
+        }
 
     }
 

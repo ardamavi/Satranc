@@ -197,7 +197,7 @@ int main(){
       kazanan = "Berabere";
     }
 
-    if(tahta.getGeriSayim() <= 1){
+    if(tahta.getGeriSayim() <= 0){
       cout << "50 adım kuralından dolayı oyun berabere bitmiştir !" << endl;
       kazanan = "Berabere";
     }
@@ -215,6 +215,24 @@ int main(){
     if((tahta.getTaslar()->size() != eskiTaslarSize) || oynayanTas == "Piyon"){
       tahta.setGeriSayim(50);
     }
+
+    // En passant :
+    if((tahta.getGecerkenAlma().second != yok) && (oynayanTas == "Piyon")){
+        if(oynanacakYer == tahta.getGecerkenAlma().first){
+          for (int i = 0; i < tahta.getTaslar()->size(); i++) {
+            if((*(tahta.getTaslar()))[i]->getKonum() == make_pair((oynanacakYer.first - takimOyunSirasi), (oynanacakYer.second))){
+
+              tahta.getTaslar()->erase((*(tahta.getTaslar())).begin() + i);
+            }
+          }
+        }
+    }
+    if(((tahta.getGecerkenAlma().second == yok) && (oynayanTas == "Piyon") && (tasinKonumu.second == oynanacakYer.second) && ((oynanacakYer.first - tasinKonumu.first)%2 ==  0))){
+      tahta.setGecerkenAlma(make_pair((oynanacakYer.first - takimOyunSirasi), (oynanacakYer.second)), takimOyunSirasi );
+    }else if(tahta.getGecerkenAlma().second == takimEskiOyunSirasi){
+      tahta.setGecerkenAlma(make_pair((oynanacakYer.first - takimOyunSirasi), (oynanacakYer.second)), yok );
+    }
+
 
   }while(kazanan == "Yok");
 

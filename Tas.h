@@ -11,6 +11,7 @@ using namespace std;
 enum takim{
 
     beyaz = 1,
+    yok = 0,
     siyah = -1
 
 };
