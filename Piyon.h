@@ -1,7 +1,7 @@
 // Arda Mavi - ardamavi.com
 
-#ifndef PİYON_H
-#define PİYON_H
+#ifndef PIYON_H
+#define PIYON_H
 
 #include "Tas.h"
 #include "Tahta.h"

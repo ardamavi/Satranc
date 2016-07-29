@@ -1,7 +1,7 @@
 // Arda Mavi - ardamavi.com
 
-#ifndef VEZİR_H
-#define VEZİR_H
+#ifndef VEZIR_H
+#define VEZIR_H
 
 #include "Tas.h"
 
