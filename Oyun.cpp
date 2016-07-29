@@ -32,7 +32,6 @@ int main(){
     // Bir tahta oluşturulur :
     Tahta tahta;
 
-    cout << tahta.getOsAdi() << endl;
     if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
       // Mac icin ekran temizleme :
       system("clear");
