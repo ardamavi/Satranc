@@ -670,8 +670,16 @@ bool Tahta::patMi(takim oyunSirasi){
 
   cout << "Pat !" << endl;
 
-  // Mac için seslendirme :
-  system("say Pat!");
+  if (getOsAdi() == "Mac") {
+    // Mac icin seslendirme :
+    system("say Pat!");
+  }else if(getOsAdi() == "Windows"){
+    // Windows için seslendirme :
+    system("echo Pat!|ptts");
+  }else if(getOsAdi() == "Linux"){
+    // Linux için seslendirme :
+    system("echo Pat!|espeak");
+  }
 
   return true;
 }
@@ -694,4 +702,19 @@ pair<pair<int, int>, takim> Tahta::getGecerkenAlma(){
 // gecerkenAlma değişkenini ayarlar :
 void Tahta::setGecerkenAlma(pair<int, int> gectigiYer, takim renk){
   this->gecerkenAlma = make_pair( gectigiYer, renk );
+}
+
+// OS Adını döner :
+string Tahta::getOsAdi(){
+  #ifdef _WIN32
+  return "Windows";
+  #elif _WIN64
+  return "Windows";
+  #elif __APPLE__ || __MACH__
+  return "Mac";
+  #elif __linux__
+  return "Linux";
+  #else
+  return "Other";
+  #endif
 }

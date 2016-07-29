@@ -67,6 +67,9 @@ class Tahta {
 
     void setGecerkenAlma(pair<int, int>, takim);
 
+    // OS Adını döner :
+    string getOsAdi();
+
 };
 
 #endif

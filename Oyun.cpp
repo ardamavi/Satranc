@@ -29,8 +29,17 @@ int sayiCharToSayi(char sayiChar){
 
 int main(){
 
-    // Mac icin ekran temizleme :
-    system("clear");
+    // Bir tahta oluşturulur :
+    Tahta tahta;
+
+    cout << tahta.getOsAdi() << endl;
+    if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
+      // Mac icin ekran temizleme :
+      system("clear");
+    }else if(tahta.getOsAdi() == "Windows"){
+      // Windows için silme :
+      system("cls");
+    }
 
     // Ekrandaki renkleri ayarlama :
     cout << defaultColorbg << defaultColorfg;
@@ -49,9 +58,6 @@ int main(){
 
     // İleride vektör boyutunu tutacak olan değişken :
     int eskiTaslarSize;
-
-    // Bir tahta oluşturulur :
-    Tahta tahta;
 
   do{
 
@@ -83,15 +89,42 @@ int main(){
       // Not : oynamaTamamMi değişkeni tur sonunda ayarlanır.
       if(!oynamaTamamMi){
         cout << "\nHatalı Giriş !\n";
-        system("say Hatalı giriş!");
+        if (tahta.getOsAdi() == "Mac") {
+          // Mac icin seslendirme :
+          system("say Hatalı giriş!");
+        }else if(tahta.getOsAdi() == "Windows"){
+          // Windows için seslendirme :
+          system("echo Hatalı giriş!|ptts");
+        }else if(tahta.getOsAdi() == "Linux"){
+          // Linux için seslendirme :
+          system("echo Hatalı giriş!|espeak");
+        }
       }
 
     // Mac icin oyun sırası seslendirme:
     cout << "\nOyun Sırası: " << oyunSirasi << endl;
     if(oyunSirasi == "Beyaz"){
-      system("say Oyun sırası beyaz takımda");
+      if (tahta.getOsAdi() == "Mac") {
+        // Mac icin seslendirme :
+        system("say Oyun sırası beyaz takımda!");
+      }else if(tahta.getOsAdi() == "Windows"){
+        // Windows için seslendirme :
+        system("echo Oyun sırası beyaz takımda!|ptts");
+      }else if(tahta.getOsAdi() == "Linux"){
+        // Linux için seslendirme :
+        system("echo Oyun sırası beyaz takımda!|espeak");
+      }
     }else if(oyunSirasi == "Siyah"){
-      system("say Oyun sırası siyah takımda");
+      if (tahta.getOsAdi() == "Mac") {
+        // Mac icin seslendirme :
+        system("say Oyun sırası siyah takımda!");
+      }else if(tahta.getOsAdi() == "Windows"){
+        // Windows için seslendirme :
+        system("echo Oyun sırası siyah takımda!|ptts");
+      }else if(tahta.getOsAdi() == "Linux"){
+        // Linux için seslendirme :
+        system("echo Oyun sırası siyah takımda!|espeak");
+      }
     }
 
     // Eski oyun sırasını tutan değişken :
@@ -128,7 +161,13 @@ int main(){
 
       if(!(((0 <= sayiCharToSayi(tasinKonumuChar[0])) && (sayiCharToSayi(tasinKonumuChar[0])) < 8) && ((0 <= harfToSayi(tasinKonumuChar[1])) && (harfToSayi(tasinKonumuChar[1]) < 8)))){
         oynamaTamamMi = false;
-        system("clear");
+        if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
+          // Mac icin ekran temizleme :
+          system("ar");
+        }else if(tahta.getOsAdi() == "Windows"){
+          // Windows için silme :
+          system("cls");
+        }
         continue;
       }
 
@@ -143,7 +182,13 @@ int main(){
 
       if(!(((0 <= sayiCharToSayi(oynanacakYerChar[0])) && (sayiCharToSayi(oynanacakYerChar[0])) < 8) && ((0 <= harfToSayi(oynanacakYerChar[1])) && (harfToSayi(oynanacakYerChar[1]) < 8)))){
         oynamaTamamMi = false;
-        system("clear");
+        if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
+          // Mac icin ekran temizleme :
+          system("clear");
+        }else if(tahta.getOsAdi() == "Windows"){
+          // Windows için silme :
+          system("cls");
+        }
         continue;
       }
 
@@ -173,8 +218,16 @@ int main(){
         tahta.setTaslar(taslarKopya);
         cout << "Şahınızı kurtarmanız lazım !" << endl;
 
-        // Mac için seslendirme :
-        system("say Şahınızı kurtarmanız lazım !");
+        if (tahta.getOsAdi() == "Mac") {
+          // Mac icin seslendirme :
+          system("say Şahınızı kurtarmanız lazım!");
+        }else if(tahta.getOsAdi() == "Windows"){
+          // Windows için seslendirme :
+          system("echo Şahınızı kurtarmanız lazım!|ptts");
+        }else if(tahta.getOsAdi() == "Linux"){
+          // Linux için seslendirme :
+          system("echo Şahınızı kurtarmanız lazım!|espeak");
+        }
 
         // Sah durumundan kurtulmadığı için tur tekrar oynanacaktır :
         oynamaTamamMi = false;
@@ -208,13 +261,26 @@ int main(){
         // Hareket önceki tasların konumu tahtaya yerleştirilir :
         tahta.setTaslar(taslarKopya);
 
-        // Mac için seslendirme :
-        system("say Şahınızı tehlikeye atamazsınız !");
+        if (tahta.getOsAdi() == "Mac") {
+          // Mac icin seslendirme :
+          system("say Şahınızı tehlikeye atamazsınız!");
+        }else if(tahta.getOsAdi() == "Windows"){
+          // Windows için seslendirme :
+          system("echo Şahınızı tehlikeye atamazsınız!|ptts");
+        }else if(tahta.getOsAdi() == "Linux"){
+          // Linux için seslendirme :
+          system("echo Şahınızı tehlikeye atamazsınız!|espeak");
+        }
       }
     }
 
-    // Mac icin ekran temizleme:
-    system("clear");
+    if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
+      // Mac icin ekran temizleme :
+      system("clear");
+    }else if(tahta.getOsAdi() == "Windows"){
+      // Windows için silme :
+      system("cls");
+    }
 
     // Taslar kopya silinir :
     // Taslar kopya pointer olduğu için ilk içi temizelenir
@@ -235,14 +301,31 @@ int main(){
     if(sahDurum){
       cout << "Şah !" << endl;
 
-      // Mac için seslendirme :
-      system("say Şah !");
+      if (tahta.getOsAdi() == "Mac") {
+        // Mac icin seslendirme :
+        system("say Şah!");
+      }else if(tahta.getOsAdi() == "Windows"){
+        // Windows için seslendirme :
+        system("echo Şah!|ptts");
+      }else if(tahta.getOsAdi() == "Linux"){
+        // Linux için seslendirme :
+        system("echo Şah!|espeak");
+      }
 
       // Oyunun mat olup olmadığı belirlenir:
       if(tahta.sahMatMi(takimOyunSirasi, tahta.tehditVarMi(tahta.rakipTakimSahKonum(takimOyunSirasi), takimOyunSirasi).second)){
         // Mat oldu !
         cout << "Mat !" << endl;
-        system("say Mat !");
+        if (tahta.getOsAdi() == "Mac") {
+          // Mac icin seslendirme :
+          system("say Mat!");
+        }else if(tahta.getOsAdi() == "Windows"){
+          // Windows için seslendirme :
+          system("echo Mat!|ptts");
+        }else if(tahta.getOsAdi() == "Linux"){
+          // Linux için seslendirme :
+          system("echo Mat!|espeak");
+        }
 
         // Kazanan mat edendir :
         kazanan = oyunSirasi;
@@ -318,8 +401,16 @@ int main(){
 
   cout << "\nOyun Bitti\n" << "\nKazanan: " << kazanan << endl;
 
-  // Mac icin oyunun bitimini sesli haber verme:
-  system("say Oyun bitti !");
+  if (tahta.getOsAdi() == "Mac") {
+    // Mac icin seslendirme :
+    system("say Oyun Bitti!");
+  }else if(tahta.getOsAdi() == "Windows"){
+    // Windows için seslendirme :
+    system("echo Oyun Bitti!|ptts");
+  }else if(tahta.getOsAdi() == "Linux"){
+    // Linux için seslendirme :
+    system("echo Oyun Bitti!|espeak");
+  }
 
   // Mac icin kazanan seslendirme:
   if(kazanan == "Beyaz"){
