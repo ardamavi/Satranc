@@ -92,12 +92,6 @@ int main(){
         if (tahta.getOsAdi() == "Mac") {
           // Mac icin seslendirme :
           system("say Hatalı giriş!");
-        }else if(tahta.getOsAdi() == "Windows"){
-          // Windows için seslendirme :
-          system("echo Hatalı giriş!|ptts");
-        }else if(tahta.getOsAdi() == "Linux"){
-          // Linux için seslendirme :
-          system("echo Hatalı giriş!|espeak");
         }
       }
 
@@ -107,23 +101,11 @@ int main(){
       if (tahta.getOsAdi() == "Mac") {
         // Mac icin seslendirme :
         system("say Oyun sırası beyaz takımda!");
-      }else if(tahta.getOsAdi() == "Windows"){
-        // Windows için seslendirme :
-        system("echo Oyun sırası beyaz takımda!|ptts");
-      }else if(tahta.getOsAdi() == "Linux"){
-        // Linux için seslendirme :
-        system("echo Oyun sırası beyaz takımda!|espeak");
       }
     }else if(oyunSirasi == "Siyah"){
       if (tahta.getOsAdi() == "Mac") {
         // Mac icin seslendirme :
         system("say Oyun sırası siyah takımda!");
-      }else if(tahta.getOsAdi() == "Windows"){
-        // Windows için seslendirme :
-        system("echo Oyun sırası siyah takımda!|ptts");
-      }else if(tahta.getOsAdi() == "Linux"){
-        // Linux için seslendirme :
-        system("echo Oyun sırası siyah takımda!|espeak");
       }
     }
 
@@ -221,12 +203,6 @@ int main(){
         if (tahta.getOsAdi() == "Mac") {
           // Mac icin seslendirme :
           system("say Şahınızı kurtarmanız lazım!");
-        }else if(tahta.getOsAdi() == "Windows"){
-          // Windows için seslendirme :
-          system("echo Şahınızı kurtarmanız lazım!|ptts");
-        }else if(tahta.getOsAdi() == "Linux"){
-          // Linux için seslendirme :
-          system("echo Şahınızı kurtarmanız lazım!|espeak");
         }
 
         // Sah durumundan kurtulmadığı için tur tekrar oynanacaktır :
@@ -264,12 +240,6 @@ int main(){
         if (tahta.getOsAdi() == "Mac") {
           // Mac icin seslendirme :
           system("say Şahınızı tehlikeye atamazsınız!");
-        }else if(tahta.getOsAdi() == "Windows"){
-          // Windows için seslendirme :
-          system("echo Şahınızı tehlikeye atamazsınız!|ptts");
-        }else if(tahta.getOsAdi() == "Linux"){
-          // Linux için seslendirme :
-          system("echo Şahınızı tehlikeye atamazsınız!|espeak");
         }
       }
     }
@@ -304,12 +274,6 @@ int main(){
       if (tahta.getOsAdi() == "Mac") {
         // Mac icin seslendirme :
         system("say Şah!");
-      }else if(tahta.getOsAdi() == "Windows"){
-        // Windows için seslendirme :
-        system("echo Şah!|ptts");
-      }else if(tahta.getOsAdi() == "Linux"){
-        // Linux için seslendirme :
-        system("echo Şah!|espeak");
       }
 
       // Oyunun mat olup olmadığı belirlenir:
@@ -319,12 +283,6 @@ int main(){
         if (tahta.getOsAdi() == "Mac") {
           // Mac icin seslendirme :
           system("say Mat!");
-        }else if(tahta.getOsAdi() == "Windows"){
-          // Windows için seslendirme :
-          system("echo Mat!|ptts");
-        }else if(tahta.getOsAdi() == "Linux"){
-          // Linux için seslendirme :
-          system("echo Mat!|espeak");
         }
 
         // Kazanan mat edendir :
@@ -404,12 +362,6 @@ int main(){
   if (tahta.getOsAdi() == "Mac") {
     // Mac icin seslendirme :
     system("say Oyun Bitti!");
-  }else if(tahta.getOsAdi() == "Windows"){
-    // Windows için seslendirme :
-    system("echo Oyun Bitti!|ptts");
-  }else if(tahta.getOsAdi() == "Linux"){
-    // Linux için seslendirme :
-    system("echo Oyun Bitti!|espeak");
   }
 
   // Mac icin kazanan seslendirme:

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <cstdlib>
 #include "Tas.h"
 #include "Kale.h"
 #include "At.h"
@@ -673,12 +674,6 @@ bool Tahta::patMi(takim oyunSirasi){
   if (getOsAdi() == "Mac") {
     // Mac icin seslendirme :
     system("say Pat!");
-  }else if(getOsAdi() == "Windows"){
-    // Windows için seslendirme :
-    system("echo Pat!|ptts");
-  }else if(getOsAdi() == "Linux"){
-    // Linux için seslendirme :
-    system("echo Pat!|espeak");
   }
 
   return true;
