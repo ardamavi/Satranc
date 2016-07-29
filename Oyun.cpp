@@ -29,12 +29,13 @@ int sayiCharToSayi(char sayiChar){
 
 int main(){
 
-    // Mac icin ekran temizleme:
-
+    // Mac icin ekran temizleme :
     system("clear");
 
+    // Ekrandaki renkleri ayarlama :
     cout << defaultColorbg << defaultColorfg;
 
+    // Oyun başlangıcı bilgilendirme yazıları :
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e" << endl;
     cout << "Rok girişleri için: \"uzun rok\" ya da \"kısa rok\" diye yazmalısınız." << endl;
@@ -45,8 +46,11 @@ int main(){
     pair <int, int> tasinKonumu;
     pair <int, int> oynanacakYer;
     bool sahDurum = false;
+
+    // İleride vektör boyutunu tutacak olan değişken :
     int eskiTaslarSize;
 
+    // Bir tahta oluşturulur :
     Tahta tahta;
 
   do{
@@ -58,17 +62,25 @@ int main(){
         oyunSirasi = "Beyaz";
     }
 
+    // Turun doğru olup olmadığını kontrol eder :
     bool oynamaTamamMi = true;
+
     takim takimOyunSirasi;
     takim takimEskiOyunSirasi;
 
     do{
 
-      cout << defaultColorbg << defaultColorfg << endl;
-      // Tahta Silinir ve Cizilir:
-      tahta.tahtaCiz();
+      // Ekrandaki renkleri orijinaline ayarlama :
       cout << defaultColorbg << defaultColorfg << endl;
 
+      // Tahta cizilir:
+      tahta.tahtaCiz();
+
+      // Ekrandaki renkleri orijinaline ayarlama :
+      cout << defaultColorbg << defaultColorfg << endl;
+
+      // Turun doğru oynanıp oynanmadığına göre ekrana çıktı verir :
+      // Not : oynamaTamamMi değişkeni tur sonunda ayarlanır.
       if(!oynamaTamamMi){
         cout << "\nHatalı Giriş !\n";
         system("say Hatalı giriş!");
@@ -82,6 +94,7 @@ int main(){
       system("say Oyun sırası siyah takımda");
     }
 
+    // Eski oyun sırasını tutan değişken :
     string eskiOyunSirasi;
 
     if(oyunSirasi == "Beyaz"){
@@ -94,67 +107,93 @@ int main(){
       takimEskiOyunSirasi = beyaz;
     }
 
+    // Yanlış oynama durumunda tasların yerini geri almak için :
     vector<Tas*> taslarKopya;
-
     // Taşlar kopyalanır:
     for (int i = 0; i < tahta.getTaslar()->size(); i++) {
       taslarKopya.push_back(new Tas(*(*(tahta.getTaslar()))[i]));
     }
 
+    // Tahtadaki tasların sayısı atanır :
     eskiTaslarSize = tahta.getTaslar()->size();
 
+    // Oynanacak taşın konumu alınır :
     string tasinKonumuChar;
     cout << "\nTaşın Konumunu giriniz: ";
     getline(cin, tasinKonumuChar);
 
+    // Oyunda rok yapma durumunu kontrol eder :
     if(tahta.karsilastir(tasinKonumuChar, KISA_ROK, 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
-    tasinKonumu.first = sayiCharToSayi(tasinKonumuChar[0]);
-    tasinKonumu.second = harfToSayi(tasinKonumuChar[1]);
+      // Eğer rok yapılmak istenmiyorsa :
 
+      // Tasın konumu pair olarak tutulur :
+      tasinKonumu.first = sayiCharToSayi(tasinKonumuChar[0]);
+      tasinKonumu.second = harfToSayi(tasinKonumuChar[1]);
+
+      // Taşın oynamak istenilen yeri alınır :
       string oynanacakYerChar;
       cout << "\nTaşı Oynayacağınız Konumu Giriniz: ";
       getline(cin, oynanacakYerChar);
+
+      // oynanacak yerin konumu pair olarak tutulur :
       oynanacakYer.first = sayiCharToSayi(oynanacakYerChar[0]);
       oynanacakYer.second = harfToSayi(oynanacakYerChar[1]);
     }
 
+    // Eğer şah çekildiyse :
+    // Not : sahDurum turun sonunda ayarlanır.
     if(sahDurum == true){
 
       if(tahta.karsilastir(tasinKonumuChar, KISA_ROK, 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
+        // Eğer rok yapılmak istenmiyorsa tas oynanır :
         tahta.hareketEt(oyunSirasi, tasinKonumu, oynanacakYer);
       }else{
+        // Rok yapılır :
         tahta.rokYapma(oyunSirasi, tasinKonumuChar);
       }
 
+      // sahDurum güncellenir :
       sahDurum = tahta.sahVarMi(takimEskiOyunSirasi);
 
+      // Hala Şah durumu varsa :
       if(sahDurum == true){
-        // Kopyalanan orijinale atanir :
+        // Kopyalanan taslar tahtaya dizilir atanir :
         tahta.setTaslar(taslarKopya);
         cout << "Şahınızı kurtarmanız lazım !" << endl;
 
         // Mac için seslendirme :
         system("say Şahınızı kurtarmanız lazım !");
 
+        // Sah durumundan kurtulmadığı için tur tekrar oynanacaktır :
         oynamaTamamMi = false;
       }else{
-        //Dogru oynanmis mi :
+        //Dogru oynanmis ise yeni tur için onay verilir :
         oynamaTamamMi = true;
       }
 
     }else{
 
       if(tahta.karsilastir(tasinKonumuChar, "kısa rok", 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
-        //Dogru oynanmis mi :
+        // Eğer rok yapılmak istenmiyorsa :
+
+        // Hareketin doğru olup olmadığı alınır :
         oynamaTamamMi = (tahta.hareketEt(oyunSirasi, tasinKonumu,oynanacakYer));
       }else{
+        // // Hareketin doğru olup olmadığı alınır :
         oynamaTamamMi = tahta.rokYapma(oyunSirasi, tasinKonumuChar);
       }
 
+      // Oyun sonrasında sah durumu var mı bakılır :
       if(tahta.sahVarMi(takimEskiOyunSirasi)){
+        // Sah durumu varsa :
+
+        // Tur tekrarlama için ayar yapılır :
         oynamaTamamMi = false;
+
+        // Uyarı verilir :
         cout << "Şahınızı tehlikeye atamazsınız !" << endl;
 
+        // Hareket önceki tasların konumu tahtaya yerleştirilir :
         tahta.setTaslar(taslarKopya);
 
         // Mac için seslendirme :
@@ -165,80 +204,104 @@ int main(){
     // Mac icin ekran temizleme:
     system("clear");
 
+    // Taslar kopya silinir :
+    // Taslar kopya pointer olduğu için ilk içi temizelenir
+    // sonra pointerlar silinir
     for (int i = 0; i < taslarKopya.size(); i++)
     {
       delete(taslarKopya[i]);
     }
     taslarKopya.clear();
+
+    // Eğer oynamaTamam değilse tur tekrarlanır.
   }while(!oynamaTamamMi);
 
-    // Şah ve mat var mı ?
+    // Şah var mı diye bakılır ve ileride kullanmak için saklanır :
     sahDurum = tahta.sahVarMi(takimOyunSirasi);
 
-    // Sah mı ?
+    // Sah ise sah olduğu belirtilir :
     if(sahDurum){
       cout << "Şah !" << endl;
 
       // Mac için seslendirme :
       system("say Şah !");
 
-
+      // Oyunun mat olup olmadığı belirlenir:
       if(tahta.sahMatMi(takimOyunSirasi, tahta.tehditVarMi(tahta.rakipTakimSahKonum(takimOyunSirasi), takimOyunSirasi).second)){
         // Mat oldu !
         cout << "Mat !" << endl;
         system("say Mat !");
 
+        // Kazanan mat edendir :
         kazanan = oyunSirasi;
       }
 
     }
 
+    // Eğer pat olursa oyun berabere biter :
     if(kazanan == "Yok" && tahta.patMi(takimOyunSirasi)){
       kazanan = "Berabere";
     }
 
+    // 50 adım kuralı kontrol edilir :
     if(tahta.getGeriSayim() <= 0){
       cout << "50 adım kuralından dolayı oyun berabere bitmiştir !" << endl;
       kazanan = "Berabere";
     }
 
+    // Tur sonunda 50 adım kuralı için sayaç bir azaltılır :
     tahta.setGeriSayim(tahta.getGeriSayim()-1);
 
     string oynayanTas;
 
+    // Taslar gezilir :
     for (int i = 0; i < tahta.getTaslar()->size(); i++) {
+      // Tas oynanacak yerde ise :
       if((*(tahta.getTaslar()))[i]->getKonum() == oynanacakYer){
+        // Oynayan tasın adı tutulur :
         oynayanTas = (*(tahta.getTaslar()))[i]->getAdi();
       }
     }
 
+    // Not : Bu kısım 50 adım kuralı ile ilgilirdir :
+    // Eğer oynayan piyon ise ya da bir taş yenmişse :
     if((tahta.getTaslar()->size() != eskiTaslarSize) || oynayanTas == "Piyon"){
+      // Geri sayım yeniden başlatılır :
       tahta.setGeriSayim(50);
     }
 
-    // En passant :
+    // En passant kuralı için:
+    // Oynayan taş piyon ise ve En Passant kuralı kapalı değilse :
     if((tahta.getGecerkenAlma().second != yok) && (oynayanTas == "Piyon")){
+      // Oynanacak yer Piyonun arkada bıraktığı yer ise :
         if(oynanacakYer == tahta.getGecerkenAlma().first){
+          // Taslar gezilir :
           for (int i = 0; i < tahta.getTaslar()->size(); i++) {
+            // Taş atlayan taş ise :
             if((*(tahta.getTaslar()))[i]->getKonum() == make_pair((oynanacakYer.first - takimOyunSirasi), (oynanacakYer.second))){
 
+              // Atlayan tas yenir(taslar vektöründen silinir) :
               tahta.getTaslar()->erase((*(tahta.getTaslar())).begin() + i);
             }
           }
         }
     }
+    // En passant aktif değil ise :
     if(((tahta.getGecerkenAlma().second == yok) && (oynayanTas == "Piyon") && (tasinKonumu.second == oynanacakYer.second) && ((oynanacakYer.first - tasinKonumu.first)%2 ==  0))){
+      // En passant aktif ise kural için ayarlar yapılır :
       tahta.setGecerkenAlma(make_pair((oynanacakYer.first - takimOyunSirasi), (oynanacakYer.second)), takimOyunSirasi );
     }else if(tahta.getGecerkenAlma().second == takimEskiOyunSirasi){
+      // En passant aktif değil ise ve kimse geçilen yere girmeye çalışmadıysa :
       tahta.setGecerkenAlma(make_pair((oynanacakYer.first - takimOyunSirasi), (oynanacakYer.second)), yok );
     }
 
-
+    // Bir kazanan olana kadat oyun sürer :
   }while(kazanan == "Yok");
 
-  // Tahta Silinir ve Cizilir:
+  // Son kez tahta cizilir:
   tahta.tahtaCiz();
 
+  // Terminal orijinal rengine ayarlanır :
   cout << defaultColorbg << defaultColorfg;
 
   cout << "\nOyun Bitti\n" << "\nKazanan: " << kazanan << endl;

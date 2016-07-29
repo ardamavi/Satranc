@@ -27,12 +27,14 @@ using namespace std;
 
 Tahta::Tahta(){
 
+    // Rok durumları yapılabilir 'e ayarlanır :
     beyazRok = make_pair(true, true);
     siyahRok = make_pair(true, true);
 
     // 50 hamle kuralı için :
     this->geriSayim = 50;
 
+    // Piyonlar tahta'daki konumlarına yerleştirilir :
     int satir = 1;
     takim renk = beyaz;
     for (int i = 0; i < 8; i++){
@@ -44,6 +46,8 @@ Tahta::Tahta(){
             i = -1;
         }
     }
+
+    // Taslar tahta'daki konumlarına yerleştirilir :
 
     renk = beyaz;
     satir = 0;
@@ -73,6 +77,7 @@ Tahta::Tahta(){
 
 }
 
+// Tahta temizlenir :
 void Tahta::tahtaSil(){
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
@@ -81,14 +86,18 @@ void Tahta::tahtaSil(){
     }
 }
 
+// Tahta çizilir :
 void Tahta::tahtaCiz(){
     tahtaSil();
     for (int i = 0; i < taslar.size(); i++){
         Tas* tas = taslar[i];
         tahta[tas->getKonum().first][tas->getKonum().second] = (tas->tasKisaltmasi());
     }
+    // Çerçeve yazdırılır :
     string cerceve = "    A  B  C  D  E  F  G  H    ";
     cout << cerceveColor << yaziBeyaz << cerceve << endl;
+
+    // Tahta çizilir :
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
             if (j == 0){
@@ -135,14 +144,17 @@ void Tahta::tahtaCiz(){
     cout << yaziBeyaz << cerceveColor << cerceve << endl;
 }
 
+// Taslar pointer vektörünü döner :
 vector<Tas*>* Tahta::getTaslar(){
 return &(this->taslar);
 }
 
+// Tahtaya taş eklememizi sağlar :
 void Tahta::tasEkle(Tas* tas){
 this->taslar.push_back(tas);
 }
 
+// Tahtaya çizilecek tasları ayarlar :
 void Tahta::setTaslar(vector<Tas*> gelenTaslar){
   for (int i = 0; i < this->taslar.size(); i++)
   {
@@ -154,9 +166,10 @@ void Tahta::setTaslar(vector<Tas*> gelenTaslar){
   }
 }
 
+// Taşı hareket ettirir :
 bool Tahta::tasHareket(pair<int, int> gidilecekYer, int rakipTasSira, bool rakiptasVarMi, int tasSira){
 this->taslar[tasSira]->setKonum(gidilecekYer);
-// Burada rakip tas var ise, erase et :
+// Burada rakip tas var ise, tas yenir(silinir) :
   if(rakiptasVarMi){
     this->taslar.erase(this->taslar.begin() + rakipTasSira);
   }
@@ -178,6 +191,7 @@ bool Tahta::hareketEt(string oyuncuSirasi, pair <int, int> tasKonum, pair <int, 
 
 int tasSira;
 
+// Oynayan taş oynaması gereken takımda değil ise hata verir :
 for (int i = 0; i < this->taslar.size(); i++) {
     if(this->taslar[i]->getKonum() == tasKonum){
         tasSira = i;
@@ -193,6 +207,7 @@ for (int i = 0; i < this->taslar.size(); i++) {
 int rakipTasSira;
 bool rakiptasVarMi = false;
 
+// Rakip taş var mı diye bakılır:
 for (int j = 0; j < this->taslar.size(); j++) {
     if(this->taslar[j]->getKonum() == gidilecekYer){
         rakiptasVarMi = true;
@@ -200,11 +215,18 @@ for (int j = 0; j < this->taslar.size(); j++) {
         break;
     }
 }
+
+// Casting yapılır :
 if(this->taslar[tasSira]->getAdi() == "Piyon"){
   if (((Piyon*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer, *this)) {
+    // Piyon kurallarına uygunsa hareket edilir :
      this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
      if (((Piyon*)this->taslar[tasSira])->vezirOlsunMu(this->taslar[tasSira]->getTakim(), gidilecekYer)){
+       // Eğer piyon vezir olacaksa :
+       // Vezir taslara eklenir
        this->taslar.push_back(new Vezir(this->taslar[tasSira]->getTakim(), this->taslar[tasSira]->getKonum().first, this->taslar[tasSira]->getKonum().second));
+
+       // Piyon silinir :
        delete(this->taslar[tasSira]);
        this->taslar.erase(this->taslar.begin()+tasSira);
      }
@@ -212,7 +234,9 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
   }
 }else if(taslar[tasSira]->getAdi() == "Kale"){
   if (((Kale*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+    // Kale kurallarına uygunsa hareket edilir :
 
+    // Kale hareket ettiği için ileride rok yapamaz:
     if(this->taslar[tasSira]->getTakim() == beyaz){
       if(this->taslar[tasSira]->getKonum().second == 0){
         // Soldaki
@@ -235,19 +259,24 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
   }
 }else if(taslar[tasSira]->getAdi() == "At"){
   if (((At*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+      // Atkurallarına uygunsa hareket edilir :
       return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
   }
 }else if(taslar[tasSira]->getAdi() == "Fil"){
   if (((Fil*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+      // Fil kurallarına uygunsa hareket edilir :
       return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
   }
 }else if(taslar[tasSira]->getAdi() == "Vezir"){
   if (((Vezir*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+      // Vezir kurallarına uygunsa hareket edilir :
       return this->tasHareket(gidilecekYer,rakipTasSira,rakiptasVarMi,tasSira);
   }
 }else if(taslar[tasSira]->getAdi() == "Sah"){
   if (((Sah*)this->taslar[tasSira])->yolKntrl(this->taslar, gidilecekYer)) {
+      // Sah kurallarına uygunsa hareket edilir :
       if(this->taslar[tasSira]->getTakim() == beyaz){
+        // Şah hareket ettiği için ileride rok yapamaz:
         beyazRok = make_pair(false, false);
       }else if(this->taslar[tasSira]->getTakim() == siyah){
         siyahRok = make_pair(false, false);
@@ -259,6 +288,7 @@ if(this->taslar[tasSira]->getAdi() == "Piyon"){
 return false;
 }
 
+// Rakip takımın sahının konumunu döndürür :
 pair<int, int> Tahta::rakipTakimSahKonum(takim hareketEdenTakimKim){
 
   for (int i  = 0; i < taslar.size(); i++) {
@@ -273,6 +303,7 @@ pair<int, int> Tahta::rakipTakimSahKonum(takim hareketEdenTakimKim){
   return make_pair(0, 0);
 }
 
+// Rakip takımının Sahının sırasını gönderir :
 int Tahta::rakipTakimSahSira(takim hareketEdenTakimKim)
 {
   pair<int, int> takimSahKonum;
@@ -289,6 +320,7 @@ int Tahta::rakipTakimSahSira(takim hareketEdenTakimKim)
   return 0;
 }
 
+// Gidilecek yere ulaşan tas var mı diye bakılır :
 pair<bool, int> Tahta::tehditVarMi(pair<int, int> gidilecekYer, takim hareketEdenTakimKim){
   for(int i = 0; i < taslar.size(); i++){
 
@@ -323,12 +355,14 @@ pair<bool, int> Tahta::tehditVarMi(pair<int, int> gidilecekYer, takim hareketEde
 
 }
 
+// Saha ulaşabilecek tas var mı diye bakılır :
 bool Tahta::sahVarMi(takim hareketEdenTakim){
 
   return (tehditVarMi(rakipTakimSahKonum(hareketEdenTakim),hareketEdenTakim)).first;
 
   }
 
+// Mat mı kontrol edilir :
 bool Tahta::sahMatMi(takim hareketEdenTakim, int tehditSira){
 
   // Şah kurtarılabilir mi ? :
@@ -580,6 +614,7 @@ bool Tahta::rokYapma(string oyunSirasi, string hangiRok){
   return true;
 }
 
+// Gelen iki string'i karşılaştırır :
 bool Tahta::karsilastir(string str1, string str2, int karakterSayisi){
 
   for (int i = 0; i < karakterSayisi; i++) {
@@ -591,6 +626,7 @@ bool Tahta::karsilastir(string str1, string str2, int karakterSayisi){
   return true;
 }
 
+// Pat mı diye bakar :
 bool Tahta::patMi(takim oyunSirasi){
 
   string strOyunSirasi;
@@ -640,18 +676,22 @@ bool Tahta::patMi(takim oyunSirasi){
   return true;
 }
 
+// Sayacın değerini döndürür :
 int Tahta::getGeriSayim(){
   return this->geriSayim;
 }
 
+// Sayacı ayarlar :
 void Tahta::setGeriSayim(int sayac){
   this->geriSayim = sayac;
 }
 
+// gecerkenAlma değişkenini döndürür :
 pair<pair<int, int>, takim> Tahta::getGecerkenAlma(){
   return this->gecerkenAlma;
 }
 
+// gecerkenAlma değişkenini ayarlar :
 void Tahta::setGecerkenAlma(pair<int, int> gectigiYer, takim renk){
   this->gecerkenAlma = make_pair( gectigiYer, renk );
 }
