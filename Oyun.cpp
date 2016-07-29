@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
+#include <cstdlib>
 #include "Color.h" // namespace Color
 #include "Tahta.h"
 #include "Tas.h"
