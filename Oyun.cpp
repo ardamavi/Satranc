@@ -48,7 +48,7 @@ int main(){
     cout << "- Satranç -\nArda Mavi - ardamavi.com" << endl;
     cout << "Girişler SayiHarf seklinde olmalidir. Orn: 2e" << endl;
     cout << "Rok girişleri için: \"uzun rok\" ya da \"kısa rok\" diye yazmalısınız." << endl;
-    cout << "Oyundan çıkış: kntrl c\n" << endl;
+    cout << "Oyundan çıkmak için klavyeden \"kntrl-c\" tuslarına basınız ya da \"cikis\" yazınız.\n" << endl;
 
     string kazanan = "Yok";
     string oyunSirasi = "Siyah";
@@ -137,6 +137,21 @@ int main(){
     cout << "\nTaşın Konumunu giriniz: ";
     getline(cin, tasinKonumuChar);
 
+    if(tasinKonumuChar == "cikis"){
+
+      if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
+        // Mac icin ekran temizleme :
+        system("clear");
+      }else if(tahta.getOsAdi() == "Windows"){
+        // Windows için silme :
+        system("cls");
+      }
+
+      cout << "Oyundan Çıkıldı !" << endl;
+      kazanan = "Berabere";
+      break;
+    }
+
     // Oyunda rok yapma durumunu kontrol eder :
     if(tahta.karsilastir(tasinKonumuChar, KISA_ROK, 8) != true && tahta.karsilastir(tasinKonumuChar, UZUN_ROK, 8) != true){
       // Eğer rok yapılmak istenmiyorsa :
@@ -145,7 +160,7 @@ int main(){
         oynamaTamamMi = false;
         if (tahta.getOsAdi() == "Mac" || tahta.getOsAdi() == "Linux") {
           // Mac icin ekran temizleme :
-          system("ar");
+          system("clear");
         }else if(tahta.getOsAdi() == "Windows"){
           // Windows için silme :
           system("cls");
