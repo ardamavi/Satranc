@@ -1,0 +1,6 @@
+{
+  "name": "C++ Satranç Oyunu",
+  "tagline": "Arda Mavi - Satranç - C++",
+  "body": "## C++ Chess Game\r\n## Arda Mavi - [ardamavi.com](http://www.ardamavi.com/)\r\n\r\nHazırladığım Terminal'de oynanan iki kişilik bir satranç oyunudur. \r\nC++ programlama dili ile yazılmıştır.\r\n\r\n### Oyun İçi Ekran Görüntüsü :\r\n<img src=\"http://i.hizliresim.com/1dR0mA.jpg\" width=\"200\">\r\n\r\nProgramın yazılma sürecinde Atom (Editor), g++ (Derleyici), Mac Terminal (Sürüm 2.6.1 (361.1)) kullanılmıştır.\r\n\r\nOyun, sıranın kimde olduğunu, oyunun durumunu (Şah, Mat, Pat), şahınızın tehlikede olduğunu ve şahınızı kurtarmanız gerektiğini söyleyebiliyor. (MacOS işletim sistemi için geçerlidir.)",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
