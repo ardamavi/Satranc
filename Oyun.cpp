@@ -134,7 +134,7 @@ int main(){
 
     // Oynanacak taşın konumu alınır :
     string tasinKonumuChar;
-    cout << "\nTaşın Konumunu giriniz: ";
+    cout << "\nTaşın konumunu giriniz: ";
     getline(cin, tasinKonumuChar);
 
     if(tasinKonumuChar == "cikis"){
@@ -174,7 +174,7 @@ int main(){
 
       // Taşın oynamak istenilen yeri alınır :
       string oynanacakYerChar;
-      cout << "\nTaşı Oynayacağınız Konumu Giriniz: ";
+      cout << "\nTaşı oynayacağınız konumu giriniz: ";
       getline(cin, oynanacakYerChar);
 
       if(!(((0 <= sayiCharToSayi(oynanacakYerChar[0])) && (sayiCharToSayi(oynanacakYerChar[0])) < 8) && ((0 <= harfToSayi(oynanacakYerChar[1])) && (harfToSayi(oynanacakYerChar[1]) < 8)))){
