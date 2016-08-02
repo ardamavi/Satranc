@@ -202,6 +202,9 @@ for (int i = 0; i < this->taslar.size(); i++) {
           return false;
         }
         break;
+    }else if(i == (this->taslar.size()-1)){
+      // Belirlenen konumda tas yok :
+      return false;
     }
 }
 
