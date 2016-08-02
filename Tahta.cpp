@@ -383,7 +383,31 @@ bool Tahta::sahMatMi(takim hareketEdenTakim, int tehditSira){
   pair <int, int> tehditKonum = taslar[tehditSira]->getKonum();
 
   vector<Tas*> taslarKopya;
+
+  // Taslar Silinir :
+  for (int i = 0; i < taslarKopya.size(); i++)
+  {
+    delete(taslarKopya[i]);
+  }
+  taslarKopya.clear();
+
+  // Taşlar kopyalanır:
+  for (int i = 0; i < getTaslar()->size(); i++) {
+    taslarKopya.push_back(new Tas(*(*(getTaslar()))[i]));
+  }
   int sahSira = rakipTakimSahSira(hareketEdenTakim);
+
+  // Rok Yaparak Kaçabillir Mi? :
+  if((rokYapma(strSahTakim, "kısa rok") == true && sahVarMi(hareketEdenTakim) == false) || (rokYapma(strSahTakim, "uzun rok") == true && sahVarMi(hareketEdenTakim) == false)){
+    setTaslar(taslarKopya);
+    return false;
+  }
+
+  for (int i = 0; i < taslarKopya.size(); i++)
+  {
+    delete(taslarKopya[i]);
+  }
+  taslarKopya.clear();
 
   for(int x = (sahKonum.first-1); x <= (sahKonum.first+1); x++){
 
