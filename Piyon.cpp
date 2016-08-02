@@ -114,6 +114,10 @@ bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer, Tahta tah
         if(tahta.getGecerkenAlma().second == yok){
           return false;
         }
+        else if (tahta.getGecerkenAlma().second == this->getTakim())
+        {
+          return false;
+        }
 
     } else if(gidilecekYer == make_pair(this->getKonum().first+ (1 * yon), this->getKonum().second+ (1 * yon))){
         // Eger çaprazi doluysa:
@@ -131,6 +135,10 @@ bool Piyon::yolKntrl(vector<Tas*> taslar, pair<int, int> gidilecekYer, Tahta tah
             }
         }
         if(tahta.getGecerkenAlma().second == yok){
+          return false;
+        }
+        else if (tahta.getGecerkenAlma().second == this->getTakim())
+        {
           return false;
         }
 

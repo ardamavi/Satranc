@@ -96,6 +96,8 @@ bool Kale::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
                 }
             }
         }
+    }
+
     // Gittigi yerde kendi takimi varsa false doner :
     for (int k = 0; k < taslar.size(); k++) {
         if(taslar[k]->getKonum() == this->getKonum()){
@@ -107,6 +109,6 @@ bool Kale::yolKntrl(vector<Tas*> taslar, pair <int, int> gidilecekyer){
             }
         }
     }
-    }
+
     return true;
 }
