@@ -390,5 +390,7 @@ int main(){
     system("say Kazanan yok!");
   }
 
+    cout << "Son" << endl;
+    
     return 0;
 }
