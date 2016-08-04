@@ -8,9 +8,9 @@ C++ programlama dili ile yazılmıştır.
 <img src="http://i.hizliresim.com/1dR0mA.jpg" width="200">
 
 ## Derleme Ve Çalıştırma: <br />
-(Compileing And Running)<br />
+(Compiling And Running)<br />
 ##### Derleme :
-(Compileing)<br />
+(Compiling)<br />
 1. `Satranc` dizine giriniz. <br />
 2. Kodları derlemek için `make` yazmanız yeterli.<br />
 
